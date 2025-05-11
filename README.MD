@@ -13,8 +13,8 @@
     - [1.3.3. `Boolean`](#133-boolean)
     - [1.3.4. `Undefined`](#134-undefined)
     - [1.3.5. `Null`](#135-null)
-    - [1.3.6. `Symbol` _(ES6 / 2015)_](#136-symbol-es6--2015)
-    - [1.3.7. `BigInt` _(ES2020)_](#137-bigint-es2020)
+    - [1.3.6. `Symbol` _(ES6+)_](#136-symbol-es6)
+    - [1.3.7. `BigInt` _(ES2020+)_](#137-bigint-es2020)
   - [1.4. 📦 Variable Declarations](#14--variable-declarations)
     - [1.4.1. `let`](#141-let)
     - [1.4.2. `const`](#142-const)
@@ -34,10 +34,9 @@
   - [1.11. 📐 Function Declarations vs Expressions](#111--function-declarations-vs-expressions)
   - [1.12. 🏹 Arrow Functions](#112--arrow-functions)
   - [1.13. 🔢 Arrays](#113--arrays)
-    - [1.13.1. Basic Array Operations (Methods)](#1131-basic-array-operations-methods)
-      - [1.13.1.1. Adding elements](#11311-adding-elements)
-      - [1.13.1.2. Removing elements](#11312-removing-elements)
-      - [1.13.1.3. Finding elements](#11313-finding-elements)
+    - [1.13.1. Adding elements](#1131-adding-elements)
+    - [1.13.2. Removing elements](#1132-removing-elements)
+    - [1.13.3. Finding elements](#1133-finding-elements)
   - [1.14. 🧱 Objects](#114--objects)
     - [1.14.1. Dot vs. Bracket Notation](#1141-dot-vs-bracket-notation)
     - [1.14.2. Object Methods](#1142-object-methods)
@@ -83,6 +82,49 @@
     - [4.6.1. Reference](#461-reference)
       - [4.6.1.1. Shallow copy](#4611-shallow-copy)
       - [4.6.1.2. Deep copy](#4612-deep-copy)
+- [5. Data Structures, Modern Operators, and Strings](#5-data-structures-modern-operators-and-strings)
+  - [5.1. 🧬 Destructuring Arrays](#51--destructuring-arrays)
+    - [5.1.1. Basic Example](#511-basic-example)
+    - [5.1.2. Skipping Elements](#512-skipping-elements)
+    - [5.1.3. Switching Variables](#513-switching-variables)
+    - [5.1.4. Destructuring from Function Return](#514-destructuring-from-function-return)
+    - [5.1.5. Destructuring Nested Arrays](#515-destructuring-nested-arrays)
+    - [5.1.6. Destructuring with Default Values](#516-destructuring-with-default-values)
+  - [5.2. 🧬 Destructuring Objects](#52--destructuring-objects)
+    - [5.2.1. Basic Object Destructuring](#521-basic-object-destructuring)
+    - [5.2.2. Renaming Variables While Destructuring](#522-renaming-variables-while-destructuring)
+    - [5.2.3. Using Default Values](#523-using-default-values)
+    - [5.2.4. Mutating Existing Variables](#524-mutating-existing-variables)
+    - [5.2.5. Nested Object Destructuring](#525-nested-object-destructuring)
+    - [5.2.6. Destructuring in Function Parameters](#526-destructuring-in-function-parameters)
+  - [5.3. 📤 5.3. Spread Operator](#53--53-spread-operator)
+    - [5.3.1. Adding Elements to an Array](#531-adding-elements-to-an-array)
+    - [5.3.2. Passing Arguments into Functions](#532-passing-arguments-into-functions)
+    - [5.3.3. Copying an Array](#533-copying-an-array)
+    - [5.3.4. Joining Two Arrays](#534-joining-two-arrays)
+    - [5.3.5. Spread Works on Iterables (Arrays, Strings, Maps, Sets)](#535-spread-works-on-iterables-arrays-strings-maps-sets)
+    - [5.3.6. Using Spread with Functions](#536-using-spread-with-functions)
+    - [5.3.7. Spread with Objects _(ES2018+)_](#537-spread-with-objects-es2018)
+    - [5.3.8. Shallow Copy of an Object](#538-shallow-copy-of-an-object)
+  - [5.4. 🧺 Rest Pattern and Parameters](#54--rest-pattern-and-parameters)
+    - [5.4.1. Rest in Arrays](#541-rest-in-arrays)
+    - [5.4.2. Skipping and Rest Elements](#542-skipping-and-rest-elements)
+    - [5.4.3. Rest in Objects](#543-rest-in-objects)
+    - [5.4.4. Rest Parameters in Functions](#544-rest-parameters-in-functions)
+  - [5.5. Short Circuiting](#55-short-circuiting)
+    - [5.5.1. `||` Logical OR](#551--logical-or)
+    - [5.5.2. `&&` Logical AND](#552--logical-and)
+    - [5.5.3. `??` Nullish Coalescing Operator _(ES2020+)_](#553--nullish-coalescing-operator-es2020)
+  - [5.6. Logical Assignment Operators _(ES2021+)_](#56-logical-assignment-operators-es2021)
+    - [5.6.1. `||=` OR Assignment](#561--or-assignment)
+    - [5.6.2. `&&=` AND Assignment](#562--and-assignment)
+    - [5.6.3. `??=` Nullish Coalescing Assignment](#563--nullish-coalescing-assignment)
+  - [5.7. Iterating with `for-of` Loops _(ES6+)_](#57-iterating-with-for-of-loops-es6)
+  - [5.8. Enhanced Object Literals _(ES6+)_](#58-enhanced-object-literals-es6)
+    - [5.8.1. Property Shorthand](#581-property-shorthand)
+    - [5.8.2. Concise Method Definitions](#582-concise-method-definitions)
+    - [5.8.3. Computed Property Names](#583-computed-property-names)
+  - [Optional Chaining](#optional-chaining)
 
 # 1. Fundamentals
 
@@ -100,7 +142,7 @@ It has evolved significantly since its creation:
   - Classes
   - Destructuring
   - And many more
-- **ES2016 – ES2022**: Smaller annual updates adding new features.
+- **ES2016 – ES2025**: Smaller annual updates adding new features.
 
 Modern browsers automatically support the latest features.  
 For older browsers, tools like **Babel** can transpile modern code to ES5.
@@ -217,7 +259,7 @@ Often used intentionally to reset or clear a variable.
 let selectedProduct = null;
 ```
 
-### 1.3.6. `Symbol` _(ES6 / 2015)_
+### 1.3.6. `Symbol` _(ES6+)_
 
 A unique and immutable value, often used as object property keys to avoid naming conflicts.
 
@@ -225,7 +267,7 @@ A unique and immutable value, often used as object property keys to avoid naming
 const id = Symbol("id");
 ```
 
-### 1.3.7. `BigInt` _(ES2020)_
+### 1.3.7. `BigInt` _(ES2020+)_
 
 Used to represent integers **larger than the `Number` type can safely handle**.
 
@@ -555,11 +597,7 @@ console.log("Hello " + [1, 2, 3]); // "Hello 1,2,3"
 console.log("Hello" - [1, 2, 3]); // NaN
 ```
 
-### 1.13.1. Basic Array Operations (Methods)
-
-JavaScript provides built-in methods to manipulate arrays:
-
-#### 1.13.1.1. Adding elements
+### 1.13.1. Adding elements
 
 ```js
 const friends = ["Michael", "Steven", "Peter"];
@@ -578,7 +616,7 @@ const newLength = friends.push("Andrew");
 console.log(newLength); // 6
 ```
 
-#### 1.13.1.2. Removing elements
+### 1.13.2. Removing elements
 
 ```js
 // Remove from end
@@ -591,7 +629,7 @@ console.log(friends); // ['Michael', 'Steven', 'Peter', 'Jay']
 console.log(shifted); // 'John'
 ```
 
-#### 1.13.1.3. Finding elements
+### 1.13.3. Finding elements
 
 ```js
 console.log(friends.indexOf("Steven")); // 1
@@ -1449,4 +1487,865 @@ console.log("Clone:", jessicaClone); // ["Alice", "Bob", "Mary", "John"]
 
 This is different from a **shallow copy**, where nested objects or arrays would still share references between the original and the copy.
 
-> ⚠️ **Note:** `structuredClone` is a method introduced in modern JavaScript that performs a deep copy of objects, including complex types like `Map`, `Set`, and `Date`. Unlike shallow copy methods, it ensures nested objects are fully copied, but it doesn't handle functions or circular references and is not yet supported in Node.js.
+> ⚠️ **Note:** `structuredClone` is a method introduced in modern JavaScript that performs a deep copy of objects, including complex types like `Map`, `Set`, and `Date`. It doesn't handle functions or circular references and is not yet supported in Node.js.
+
+# 5. Data Structures, Modern Operators, and Strings
+
+## 5.1. 🧬 Destructuring Arrays
+
+Destructuring allows you to unpack values from arrays or properties from objects into distinct variables. It's a concise way to assign variables directly from arrays.
+
+### 5.1.1. Basic Example
+
+Instead of accessing array items individually:
+
+```js
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+};
+
+// Old way
+const a = restaurant.categories[0];
+const b = restaurant.categories[1];
+const c = restaurant.categories[2];
+console.log(a, b, c); // Italian Pizzeria Vegetarian
+```
+
+You can use destructuring:
+
+```js
+// New way with destructuring
+const [x, y, z] = restaurant.categories;
+console.log(x, y, z); // Italian Pizzeria Vegetarian
+```
+
+### 5.1.2. Skipping Elements
+
+You can skip elements by leaving blank positions:
+
+```js
+const [first, , third] = restaurant.categories;
+console.log(first, third); // Italian Vegetarian
+```
+
+### 5.1.3. Switching Variables
+
+Instead of using a temporary variable to switch:
+
+```js
+let [main, secondary] = restaurant.categories;
+console.log(main, secondary); // Italian Pizzeria
+
+// Old way
+// const temp = main;
+// main = secondary;
+// secondary = temp;
+
+// New way using destructuring
+[main, secondary] = [secondary, main];
+console.log(main, secondary); // Pizzeria Italian
+```
+
+### 5.1.4. Destructuring from Function Return
+
+```js
+// Get the starter and main course by destructuring the return value
+const [starter, main] = restaurant.order(2, 1);
+console.log(starter, main); // Garlic Bread Pasta
+```
+
+The `order` method returns an array: `["Garlic Bread", "Pasta"]`, which we immediately unpack using array destructuring.
+
+### 5.1.5. Destructuring Nested Arrays
+
+Suppose you have a nested array like this:
+
+```js
+const nested = [2, 4, [5, 6]];
+```
+
+You can destructure it with matching brackets:
+
+```js
+const [i, , [j, k]] = nested;
+console.log(i, j, k); // 2 5 6
+```
+
+Here’s how it works:
+
+- `i = 2`
+- Skips the second element `4`
+- Destructures the inner array `[5, 6]` into `j` and `k`
+
+### 5.1.6. Destructuring with Default Values
+
+Default values are useful to **prevent `undefined`** when the array is shorter than expected.
+
+```js
+const numbers = [8, 9];
+
+// Destructuring with default values
+const [a = 1, b = 1, c = 1] = numbers;
+
+console.log(a, b, c); // 8 9 1
+```
+
+In this case:
+
+- `a` gets `8` from the array
+- `b` gets `9` from the array
+- `c` has no corresponding value in the array, so it falls back to its default of `1`
+
+**Realistic Example with `restaurant.order`**
+
+What if we try to order an item that doesn't exist?
+
+```js
+const [starter = "No starter", main = "No main course"] = restaurant.order(
+  10,
+  1
+);
+
+console.log(starter, main); // No starter Pasta
+```
+
+If index `10` is out of bounds in `starterMenu`, the default value `"No starter"` will be used instead of `undefined`.
+
+Here’s a well-formatted, descriptive version of your section **“5.1. 🧬 Destructuring Objects”** with improved structure, clarity, comments, and consistent formatting:
+
+## 5.2. 🧬 Destructuring Objects
+
+Object destructuring allows you to extract properties from objects and assign them to variables using a concise syntax.
+
+Unlike arrays, **the order doesn't matter** in objects, because properties are accessed by name, not by position.
+
+### 5.2.1. Basic Object Destructuring
+
+```js
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  openingHours: {
+    thu: { open: 12, close: 22 },
+    fri: { open: 11, close: 23 },
+    sat: { open: 0, close: 24 },
+  },
+};
+
+// Destructuring properties into variables
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+// Output:
+// "Classico Italiano"
+// { thu: { open: 12, close: 22 }, fri: { open: 11, close: 23 }, sat: { open: 0, close: 24 } }
+// [ 'Italian', 'Pizzeria', 'Vegetarian', 'Organic' ]
+```
+
+### 5.2.2. Renaming Variables While Destructuring
+
+You can rename properties as you destructure them:
+
+```js
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+
+console.log(restaurantName, hours, tags);
+// Output:
+// "Classico Italiano"
+// { thu: { open: 12, close: 22 }, fri: { open: 11, close: 23 }, sat: { open: 0, close: 24 } }
+// [ 'Italian', 'Pizzeria', 'Vegetarian', 'Organic' ]
+```
+
+### 5.2.3. Using Default Values
+
+If the property doesn’t exist, you can provide a fallback value:
+
+```js
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters); // [] [ 'Focaccia', 'Bruschetta', ... ]
+```
+
+### 5.2.4. Mutating Existing Variables
+
+When assigning values from an object to already declared variables using destructuring, we need to be careful. If we start the line with curly braces, JavaScript interprets it as the beginning of a code block — not an assignment. Since you can't assign to a code block, this causes a syntax error. To fix this, you must wrap the entire destructuring assignment in parentheses to signal that it's an expression, not a block.
+
+```js
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+
+// ❌ Syntax error:
+// { a, b } = obj;
+
+// ✅ Correct approach:
+({ a, b } = obj);
+console.log(a, b); // 23 7
+```
+
+### 5.2.5. Nested Object Destructuring
+
+You can go deeper into the structure of an object:
+
+```js
+const {
+  fri: { open, close },
+} = restaurant.openingHours;
+
+console.log(open, close); // 11 23
+```
+
+With variable renaming:
+
+```js
+const {
+  fri: { open: o, close: c },
+} = restaurant.openingHours;
+
+console.log(o, c); // 11 23
+```
+
+### 5.2.6. Destructuring in Function Parameters
+
+In JavaScript, functions often require multiple parameters, which can make it difficult for someone using the function to remember the correct order. To improve clarity and flexibility, it's common to pass a single object as an argument and destructure it directly in the function's parameter list. This way, the order doesn't matter, and the function becomes more self-documenting.
+
+```js
+const restaurant = {
+  // ... (same properties as above)
+
+  orderDelivery({ starterIndex, mainIndex, time, address }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+};
+
+restaurant.orderDelivery({
+  time: "22:30",
+  address: "Via del Sole, 21",
+  mainIndex: 2,
+  starterIndex: 2,
+});
+```
+
+**With Default Parameters**
+
+Destructuring in function parameters can also include default values:
+
+```js
+orderDelivery({
+  starterIndex = 1,
+  mainIndex = 0,
+  time = "20:00",
+  address,
+}) {
+  console.log(
+    `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+  );
+}
+
+// Call with missing values:
+restaurant.orderDelivery({
+  address: "Piazza Roma, 10",
+});
+// Output:
+// Order received! Bruschetta and Pizza will be delivered to Piazza Roma, 10 at 20:00
+```
+
+## 5.3. 📤 5.3. Spread Operator
+
+The spread operator is similar to destructuring, but it doesn’t create new variables.
+It’s used in places where values are expected to be comma-separated (e.g., array literals, function calls).
+
+### 5.3.1. Adding Elements to an Array
+
+Instead of manually adding individual elements from one array into another:
+
+```js
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+// Output: [1, 2, 7, 8, 9]
+```
+
+✅ You can use the **spread operator** for cleaner and more scalable code:
+
+```js
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+// Output: [1, 2, 7, 8, 9]
+```
+
+### 5.3.2. Passing Arguments into Functions
+
+```js
+console.log(...newArr);
+// Output: 1 2 7 8 9
+```
+
+```js
+const newMenu = [...restaurant.mainMenu, "Gnocci"];
+console.log(newMenu);
+// Output: ["Pizza", "Pasta", "Risotto", "Gnocci"]
+```
+
+### 5.3.3. Copying an Array
+
+```js
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+// Output: ["Pizza", "Pasta", "Risotto"]
+```
+
+### 5.3.4. Joining Two Arrays
+
+```js
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu);
+// Output: ["Pizza", "Pasta", "Risotto", "Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"]
+```
+
+### 5.3.5. Spread Works on Iterables (Arrays, Strings, Maps, Sets)
+
+```js
+const str = "Jonas";
+const letters = [...str, " ", "S."];
+console.log(letters);
+// Output: ["J", "o", "n", "a", "s", " ", "S."]
+console.log(...str);
+// Output: J o n a s
+
+
+console.log(`${...str} S.`); // ❌ SyntaxError: Can't use spread inside template literals
+```
+
+### 5.3.6. Using Spread with Functions
+
+```js
+const restaurant = {
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`
+    );
+  },
+};
+
+const ingredients = [
+  prompt("Let's make pasta! Ingredient 1?"),
+  prompt("Ingredient 2?"),
+  prompt("Ingredient 3?"),
+];
+
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+// Output example (user input): "Here is your delicious pasta with tomato, basil, and cheese"
+
+restaurant.orderPasta(...ingredients);
+// Same output using spread
+```
+
+### 5.3.7. Spread with Objects _(ES2018+)_
+
+```js
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: "Guiseppe" };
+console.log(newRestaurant);
+// Output: Object with all `restaurant` properties plus `foundedIn` and `founder`
+```
+
+### 5.3.8. Shallow Copy of an Object
+
+```js
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = "Ristorante Rome";
+
+console.log(restaurantCopy.name);
+// Output: "Ristorante Rome"
+
+console.log(restaurant.name);
+// Output: "Classico Italiano" (original remains unchanged)
+```
+
+## 5.4. 🧺 Rest Pattern and Parameters
+
+The **rest pattern** is the **opposite of the spread operator**. While the spread operator is used to **unpack** elements from an array or object, the rest pattern is used to **pack** multiple elements into a single array or object.
+It is used on the **left-hand side** of an assignment operator (`=`).
+
+### 5.4.1. Rest in Arrays
+
+```js
+// SPREAD example: used on the RIGHT side
+const arr = [1, 2, ...[3, 4]];
+console.log(arr);
+// Output: [1, 2, 3, 4]
+
+// REST example: used on the LEFT side
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+// Output: 1 2 [3, 4, 5]
+```
+
+### 5.4.2. Skipping and Rest Elements
+
+```js
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+// Note: The skipped element is not included in the rest
+// The rest pattern must be the last in the destructuring assignment
+
+console.log(pizza, risotto, otherFood);
+// Output: Pizza Risotto ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"]
+```
+
+### 5.4.3. Rest in Objects
+
+```js
+const openingHours = {
+  thu: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+
+const { sat, ...weekdays } = openingHours;
+
+console.log(weekdays);
+// Output:
+// {
+//   thu: { open: 12, close: 22 },
+//   fri: { open: 11, close: 23 }
+// }
+```
+
+### 5.4.4. Rest Parameters in Functions
+
+You can use the rest pattern to accept **an unlimited number of arguments**:
+
+```js
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3); // Output: 5
+add(5, 3, 7, 2); // Output: 17
+add(8, 2, 5, 3, 2, 1, 4); // Output: 25
+
+const x = [23, 5, 7];
+add(...x); // Output: 35
+```
+
+## 5.5. Short Circuiting
+
+Logical operators in JavaScript are more flexible than in strict Boolean logic. They:
+
+1. Work with **any data type**
+2. Return **any data type**
+3. Use **short-circuiting** to return results as soon as the outcome is determined
+
+### 5.5.1. `||` Logical OR
+
+- **Short-circuits on the first truthy value**
+- If the first operand is truthy, it's returned immediately
+- Otherwise, evaluation continues until a truthy value is found (or the last value is returned if none are truthy)
+
+```js
+console.log(3 || "Jonas"); // 3 → 3 is truthy, so it's returned immediately
+console.log("" || "Jonas"); // 'Jonas' → '' is falsy, so 'Jonas' is returned
+console.log(true || 0); // true → true is truthy
+console.log(undefined || null); // null → undefined is falsy, so it moves to null
+console.log(undefined || 0 || "" || "Hello" || 23 || null); // 'Hello' → first truthy value in the chain
+```
+
+✅ **Practical use: providing default values with `||`**
+
+This technique is often used when a variable might be undefined, null, or otherwise falsy, and you want to fall back to a default.
+
+```js
+const user = {
+  username: "", // Empty string is a falsy value
+};
+
+// Ternary operator version
+const name1 = user.username ? user.username : "Anonymous";
+console.log(name1); // Output: "Anonymous" → '' is falsy
+
+// OR short-circuit version
+const name2 = user.username || "Anonymous";
+console.log(name2); // Output: "Anonymous" → same result, shorter syntax
+```
+
+### 5.5.2. `&&` Logical AND
+
+- **Short-circuits on the first falsy value**
+- If the first operand is falsy, it's returned immediately
+- Otherwise, evaluation continues to the next operand
+
+```js
+console.log(0 && "Jonas"); // 0       → short-circuits on falsy 0
+console.log(7 && "Jonas"); // 'Jonas' → 7 is truthy, so it evaluates next
+console.log("Hello" && 23 && null && "Jonas");
+// null → first falsy value stops the chain
+```
+
+✅ **Practical use: execute code only if the function or property exists**
+
+Instead of writing an `if` statement to check if a function or method exists, you can use `&&` to conditionally call it:
+
+```js
+// Traditional if check
+if (restaurant.orderPizza) {
+  restaurant.orderPizza("mushrooms", "spinach");
+}
+
+// Cleaner version using &&
+restaurant.orderPizza && restaurant.orderPizza("mushrooms", "spinach"); // If orderPizza is defined (truthy), orderPizza will be executed
+```
+
+### 5.5.3. `??` Nullish Coalescing Operator _(ES2020+)_
+
+The `??` operator works similarly to the `||` (OR) operator, but with a focus on **nullish values** instead of all **falsy values**.
+
+**Nullish Values:**
+
+- `null`
+- `undefined`
+- <span style="color: red;">~~0~~</span>
+- <span style="color: red;">~~"" (empty string)~~</span>
+- <span style="color: red;">~~NaN~~</span>
+
+> ⚠️ **Note:** The nullish coalescing operator **does NOT** treat values like `0`, `NaN` or `''` (empty string) as nullish. These are **NOT** considered nullish.
+
+**Example:**
+
+```js
+const user1 = {
+  name: "Jonas",
+  age: 30,
+};
+
+const user2 = {
+  name: null,
+  age: 25,
+};
+
+const guestName1 = user1.name ?? "Anonymous";
+console.log(guestName1); // Output: "Jonas" → `user1.name` is not null or undefined
+
+const guestName2 = user2.name ?? "Anonymous";
+console.log(guestName2); // Output: "Anonymous" → `user2.name` is null (nullish value)
+
+const score = 0;
+const userScore = score ?? 10;
+console.log(userScore); // Output: 0 → `0` is not nullish, so it is used
+```
+
+**Short-circuit Behavior:**
+
+- The `??` operator will only **short-circuit** if the value on the **left side** is **null** or **undefined**.
+- If the value is **truthy** or **non-nullish** (like `0`, `false`, or `''`), it won't short-circuit and will return the left value.
+
+## 5.6. Logical Assignment Operators _(ES2021+)_
+
+Logical assignment operators combine the functionality of logical operators (`||`, `&&`, `??`) with assignment. These operators provide a more concise way of performing logical operations when assigning values to variables.
+
+There are three logical assignment operators:
+
+1. **`||=` (OR assignment)**:
+
+   - Assigns the right-hand value if the left-hand value is **falsy** (false, 0, "", null, undefined, NaN).
+
+2. **`&&=` (AND assignment)**:
+
+   - Assigns the right-hand value if the left-hand value is **truthy**.
+
+3. **`??=` (Nullish coalescing assignment)**:
+
+   - Assigns the right-hand value if the left-hand value is **null** or **undefined**.
+
+These logical assignment operators provide a more concise way to write conditional assignments. They help reduce verbosity and make code more readable by combining logical operations and assignment in one step.
+
+### 5.6.1. `||=` OR Assignment
+
+The **OR assignment** (`||=`) works similarly to the logical OR (`||`) operator. It assigns the right-hand value to the variable only if the left-hand value is **falsy** (i.e., `false`, `0`, `""`, `null`, `undefined`, or `NaN`).
+
+**Example:**
+
+```js
+const rest1 = {
+  name: "Capri",
+  numGuests: 0, // numGuests is 0 (falsy value)
+};
+
+const rest2 = {
+  name: "La Piazza",
+  owner: "Giovanni Rossi",
+  numGuests: undefined, // numGuests is undefined (falsy value)
+};
+
+const rest3 = {
+  name: "The Bistro",
+  numGuests: 15, // numGuests is a truthy value
+};
+
+const rest4 = {
+  name: "Pasta Paradise", // No numGuests property at all
+};
+
+// Assign numGuests to 10 if it is falsy
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
+rest3.numGuests ||= 10; // This will keep the truthy value of 15
+rest4.numGuests ||= 10; // This will add numGuests property with value 10
+
+console.log(rest1);
+// Output: { name: "Capri", numGuests: 10 }
+
+console.log(rest2);
+// Output: { name: "La Piazza", owner: "Giovanni Rossi", numGuests: 10 }
+
+console.log(rest3);
+// Output: { name: "The Bistro", numGuests: 15 }
+
+console.log(rest4);
+// Output: { name: "Pasta Paradise", numGuests: 10 }
+```
+
+**Explanation:**
+
+1. **`rest1.numGuests ||= 10`**: Since `numGuests` is `0` (falsy), the OR assignment operator sets `numGuests` to `10`.
+2. **`rest2.numGuests ||= 10`**: Since `numGuests` is `undefined` (falsy), the OR assignment operator sets `numGuests` to `10`.
+3. **`rest3.numGuests ||= 10`**: Since `numGuests` is `15` (truthy), the OR assignment operator **does not modify** the value and leaves it as `15`.
+4. **`rest4.numGuests ||= 10`**: Since `numGuests` is not defined at all, the OR assignment operator adds the `numGuests` property with a value of `10`.
+
+This demonstrates how the `||=` operator only assigns the right-hand value (`10`) if the left-hand value is **falsy**. If the value is **truthy** or if the property is missing (like in `rest4`), it will assign the value.
+
+### 5.6.2. `&&=` AND Assignment
+
+The **AND assignment** (`&&=`) works similarly to the logical AND (`&&`) operator. It assigns the right-hand value to the variable only if the left-hand value is **truthy**.
+
+**Example:**
+
+```js
+const rest1 = {
+  name: "Capri",
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: "La Piazza",
+  numGuests: 0, // Here, numGuests is 0 (falsy)
+};
+
+// Assign numGuests to 30 if numGuests is truthy
+rest1.numGuests &&= 30;
+rest2.numGuests &&= 30;
+
+console.log(rest1);
+// Output: { name: "Capri", numGuests: 30 }
+
+console.log(rest2);
+// Output: { name: "La Piazza", numGuests: 0 }
+```
+
+**Explanation:**
+
+- **`rest1.numGuests &&= 30`**: Since `numGuests` is `20` (truthy), the AND assignment operator assigns `30` to `numGuests`.
+- **`rest2.numGuests &&= 30`**: Since `numGuests` is `0` (falsy), the AND assignment operator does **not** assign `30` to `numGuests`, and it remains `0`.
+
+### 5.6.3. `??=` Nullish Coalescing Assignment
+
+The **nullish coalescing assignment** (`??=`) is similar to `||=`, but it only considers `null` and `undefined` as **nullish** values. If the left-hand value is **nullish** (either `null` or `undefined`), it assigns the right-hand value.
+
+**Example:**
+
+```js
+const rest1 = {
+  name: "Capri",
+  numGuests: null, // null is a nullish value
+};
+
+const rest2 = {
+  name: "La Piazza",
+  numGuests: 0, // 0 is not a nullish value
+};
+
+// Assign numGuests to 10 if it is null or undefined
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+console.log(rest1);
+// Output: { name: "Capri", numGuests: 10 }
+
+console.log(rest2);
+// Output: { name: "La Piazza", numGuests: 0 }
+```
+
+**Explanation:**
+
+- **`rest1.numGuests ??= 10`**: Since `numGuests` is `null` (a nullish value), the nullish coalescing assignment operator assigns `10` to `numGuests`.
+- **`rest2.numGuests ??= 10`**: Since `numGuests` is `0` (not a nullish value), the nullish coalescing assignment operator **does not** assign `10`, and `numGuests` remains `0`.
+
+Here’s a clear and concise introduction to the `for-of` loop for your README, with improved structure, explanation, and formatting:
+
+---
+
+## 5.7. Iterating with `for-of` Loops _(ES6+)_
+
+The `for-of` loop provides a **clean and readable** way to iterate over **iterables** like arrays, strings, maps, and sets. Unlike `forEach`, it supports `break`, `continue`, and `await` (in async contexts), making it a powerful alternative for looping.
+
+**Basic Iteration**
+
+```js
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item);
+```
+
+Loops through every item in the `menu` array and logs it.
+
+**Accessing Index with `entries()`**
+
+If you also want to access the index of each item, use `.entries()`, which returns an array of `[index, element]` pairs.
+
+```js
+for (const item of menu.entries()) {
+  console.log(`${item[0] + 1}: ${item[1]}`);
+}
+```
+
+`menu.entries()` returns a special iterator object. Each iteration gives you an array: `[index, item]`.
+
+**Cleaner Syntax with Destructuring**
+
+Instead of accessing array indices manually, use destructuring for more readable code:
+
+```js
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+```
+
+## 5.8. Enhanced Object Literals _(ES6+)_
+
+Enhanced object literals in ES6 allow you to write cleaner, more concise object definitions by introducing **three main improvements**:
+
+1. **Property shorthand**
+2. **Concise method definitions**
+3. **Computed property names**
+
+---
+
+### 5.8.1. Property Shorthand
+
+When a variable name matches the property name, you can omit the repetition.
+
+**Traditional syntax:**
+
+```js
+const openingHours = {
+  tue: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+
+  // Property name and variable name are the same
+  openingHours: openingHours,
+};
+```
+
+**ES6 Enhanced:**
+
+```js
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+
+  // Property shorthand – no need to repeat
+  openingHours,
+};
+```
+
+### 5.8.2. Concise Method Definitions
+
+Define methods directly without using the `function` keyword.
+
+**Traditional function syntax:**
+
+```js
+const restaurant = {
+  // ...
+
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+};
+```
+
+**ES6 method shorthand:**
+
+```js
+const restaurant = {
+  // ...
+
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+};
+```
+
+### 5.8.3. Computed Property Names
+
+You can define property names dynamically using expressions inside square brackets `[]`.
+
+**Static property names:**
+
+```js
+const openingHours = {
+  tue: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+```
+
+**ES6 computed properties:**
+
+```js
+const weekdays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+const openingHours = {
+  [weekdays[3]]: { open: 12, close: 22 }, // 'thu'
+  [weekdays[4]]: { open: 11, close: 23 }, // 'fri'
+  [`day-${2 + 4}`]: { open: 0, close: 24 }, // 'day-6'
+};
+```
+
+## Optional Chaining
+
+```js
+console.log(restaurant.openingHours);
+```
