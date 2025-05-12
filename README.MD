@@ -111,20 +111,48 @@
     - [5.4.2. Skipping and Rest Elements](#542-skipping-and-rest-elements)
     - [5.4.3. Rest in Objects](#543-rest-in-objects)
     - [5.4.4. Rest Parameters in Functions](#544-rest-parameters-in-functions)
-  - [5.5. Short Circuiting](#55-short-circuiting)
+  - [5.5. ⚡ Short Circuiting](#55--short-circuiting)
     - [5.5.1. `||` Logical OR](#551--logical-or)
     - [5.5.2. `&&` Logical AND](#552--logical-and)
     - [5.5.3. `??` Nullish Coalescing Operator _(ES2020+)_](#553--nullish-coalescing-operator-es2020)
-  - [5.6. Logical Assignment Operators _(ES2021+)_](#56-logical-assignment-operators-es2021)
+  - [5.6. ⚡ Logical Assignment Operators _(ES2021+)_](#56--logical-assignment-operators-es2021)
     - [5.6.1. `||=` OR Assignment](#561--or-assignment)
     - [5.6.2. `&&=` AND Assignment](#562--and-assignment)
     - [5.6.3. `??=` Nullish Coalescing Assignment](#563--nullish-coalescing-assignment)
-  - [5.7. Iterating with `for-of` Loops _(ES6+)_](#57-iterating-with-for-of-loops-es6)
-  - [5.8. Enhanced Object Literals _(ES6+)_](#58-enhanced-object-literals-es6)
+  - [5.7. 🔁 Iterating with `for-of` Loops _(ES6+)_](#57--iterating-with-for-of-loops-es6)
+  - [5.8. 🧱 Enhanced Object Literals _(ES6+)_](#58--enhanced-object-literals-es6)
     - [5.8.1. Property Shorthand](#581-property-shorthand)
     - [5.8.2. Concise Method Definitions](#582-concise-method-definitions)
     - [5.8.3. Computed Property Names](#583-computed-property-names)
-  - [Optional Chaining](#optional-chaining)
+  - [5.9. 🔗 Optional Chaining](#59--optional-chaining)
+    - [5.9.1. Optional Chaining on Methods](#591-optional-chaining-on-methods)
+    - [5.9.2. Optional Chaining with Arrays](#592-optional-chaining-with-arrays)
+  - [5.10. 🔁 Looping Over Objects](#510--looping-over-objects)
+    - [5.10.1. `Object.keys()` Looping Over Property Names](#5101-objectkeys-looping-over-property-names)
+    - [5.10.2. `Object.values()` Looping Over Property Values](#5102-objectvalues-looping-over-property-values)
+    - [5.10.3. `Object.entries()` Looping Over Key–Value Pairs](#5103-objectentries-looping-over-keyvalue-pairs)
+  - [5.11. Sets _(ES6+)_](#511-sets-es6)
+    - [5.11.1. Creating a Set](#5111-creating-a-set)
+    - [5.11.2. Set Properties \& Methods](#5112-set-properties--methods)
+    - [5.11.3. Iterating Over a Set](#5113-iterating-over-a-set)
+    - [5.11.4. Use Case: Removing Duplicates from an Array](#5114-use-case-removing-duplicates-from-an-array)
+    - [5.11.5. New Set Operations _(ES2025)_](#5115-new-set-operations-es2025)
+      - [5.11.5.1. Intersection](#51151-intersection)
+      - [5.11.5.2. Union](#51152-union)
+      - [5.11.5.3. Difference](#51153-difference)
+      - [5.11.5.4. Symmetric Difference](#51154-symmetric-difference)
+      - [5.11.5.5. Disjoint Check](#51155-disjoint-check)
+      - [5.11.5.6. Subset and Superset Checks](#51156-subset-and-superset-checks)
+  - [5.12. Maps _(ES6+)_](#512-maps-es6)
+    - [5.12.1. Creating and Modifying Maps](#5121-creating-and-modifying-maps)
+    - [5.12.2. Reading and Using Values](#5122-reading-and-using-values)
+    - [5.12.3. Core Map Methods](#5123-core-map-methods)
+    - [5.12.4. Key Identity](#5124-key-identity)
+    - [5.12.5. Using DOM Elements as Keys](#5125-using-dom-elements-as-keys)
+    - [5.12.6. Iteration and Use Cases](#5126-iteration-and-use-cases)
+    - [5.12.7. Converting Between Maps and Objects](#5127-converting-between-maps-and-objects)
+- [6. 🐛 JavaScript Quirks](#6--javascript-quirks)
+  - [6.1. Console Logs Capture References, Not Values](#61-console-logs-capture-references-not-values)
 
 # 1. Fundamentals
 
@@ -1949,7 +1977,7 @@ const x = [23, 5, 7];
 add(...x); // Output: 35
 ```
 
-## 5.5. Short Circuiting
+## 5.5. ⚡ Short Circuiting
 
 Logical operators in JavaScript are more flexible than in strict Boolean logic. They:
 
@@ -2059,7 +2087,7 @@ console.log(userScore); // Output: 0 → `0` is not nullish, so it is used
 - The `??` operator will only **short-circuit** if the value on the **left side** is **null** or **undefined**.
 - If the value is **truthy** or **non-nullish** (like `0`, `false`, or `''`), it won't short-circuit and will return the left value.
 
-## 5.6. Logical Assignment Operators _(ES2021+)_
+## 5.6. ⚡ Logical Assignment Operators _(ES2021+)_
 
 Logical assignment operators combine the functionality of logical operators (`||`, `&&`, `??`) with assignment. These operators provide a more concise way of performing logical operations when assigning values to variables.
 
@@ -2200,11 +2228,7 @@ console.log(rest2);
 - **`rest1.numGuests ??= 10`**: Since `numGuests` is `null` (a nullish value), the nullish coalescing assignment operator assigns `10` to `numGuests`.
 - **`rest2.numGuests ??= 10`**: Since `numGuests` is `0` (not a nullish value), the nullish coalescing assignment operator **does not** assign `10`, and `numGuests` remains `0`.
 
-Here’s a clear and concise introduction to the `for-of` loop for your README, with improved structure, explanation, and formatting:
-
----
-
-## 5.7. Iterating with `for-of` Loops _(ES6+)_
+## 5.7. 🔁 Iterating with `for-of` Loops _(ES6+)_
 
 The `for-of` loop provides a **clean and readable** way to iterate over **iterables** like arrays, strings, maps, and sets. Unlike `forEach`, it supports `break`, `continue`, and `await` (in async contexts), making it a powerful alternative for looping.
 
@@ -2240,7 +2264,7 @@ for (const [i, el] of menu.entries()) {
 }
 ```
 
-## 5.8. Enhanced Object Literals _(ES6+)_
+## 5.8. 🧱 Enhanced Object Literals _(ES6+)_
 
 Enhanced object literals in ES6 allow you to write cleaner, more concise object definitions by introducing **three main improvements**:
 
@@ -2338,14 +2362,513 @@ const openingHours = {
 const weekdays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 const openingHours = {
-  [weekdays[3]]: { open: 12, close: 22 }, // 'thu'
+  [weekdays[1]]: { open: 12, close: 22 }, // 'thu'
   [weekdays[4]]: { open: 11, close: 23 }, // 'fri'
   [`day-${2 + 4}`]: { open: 0, close: 24 }, // 'day-6'
 };
 ```
 
-## Optional Chaining
+## 5.9. 🔗 Optional Chaining
+
+**Optional chaining (`?.`)** lets you safely access deeply nested properties or methods without manually checking each level.
+If a part of the chain is `null` or `undefined`, it **short-circuits** and returns `undefined` — preventing runtime errors.
+
+**Accessing Non-Existent Properties (Traditional Approach)**
+
+Accessing a property on a potentially undefined object can cause an error:
 
 ```js
-console.log(restaurant.openingHours);
+const openingHours = {
+  tue: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+
+console.log(restaurant.openingHours.mon.open); // ❌ Error
+```
+
+**Safe Access**
+
+```js
+if (restaurant.openingHours && restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open); // ✅ Safe
+}
+```
+
+**✅ Using Optional Chaining for Safe Property Access**
+
+```js
+console.log(restaurant.openingHours?.mon?.open); // ✅ undefined (no error)
+```
+
+**Explanation:**
+
+- Attempts to access `restaurant.openingHours.mon.open`.
+- If `openingHours` or `mon` doesn't exist (i.e., is `null` or `undefined`), it **returns undefined** instead of throwing an error.
+
+> 🔍 Only `null` or `undefined` trigger the short-circuit — other falsy values like `0` or `''` will **not**.
+
+**Example: Looping Over Days with Default Values**
+
+```js
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 6;
+  console.log(`On ${day}, we open at ${open}`);
+}
+```
+
+**What this does:**
+
+- Loops over each day of the week.
+- Uses optional chaining to access the `open` time for each day.
+- If the day isn't defined in `openingHours`, it defaults to `6`.
+- Uses `??` instead of `||` to allow `0` as a valid opening time (e.g. `sat`).
+
+**Output:**
+
+```
+On mon, we open at 6
+On tue, we open at 12
+On wed, we open at 6
+On thu, we open at 6
+On fri, we open at 11
+On sat, we open at 0
+On sun, we open at 6
+```
+
+### 5.9.1. Optional Chaining on Methods
+
+You can also use optional chaining to safely call methods:
+
+```js
+console.log(restaurant.order?.(0, 1) ?? "Method does not exist");
+// → ["Focaccia", "Pasta"]
+
+console.log(restaurant.orderRisotto?.(0, 1) ?? "Method does not exist");
+// → "Method does not exist"
+```
+
+### 5.9.2. Optional Chaining with Arrays
+
+```js
+const users = [{ name: "Jonas", email: "hello@jonas.io" }];
+
+console.log(users[0]?.name ?? "User array empty"); // → "Jonas"
+```
+
+**Explanation:**
+
+- Checks if the first user exists before trying to access `name`.
+- Falls back to `"User array empty"` if `users[0]` is `undefined`.
+
+> ✅ Cleaner and safer than checking `users.length > 0`.
+
+## 5.10. 🔁 Looping Over Objects
+
+JavaScript objects aren't directly iterable like arrays, but we can loop over their **properties**, **values**, or **entries** using built-in `Object` methods.
+
+### 5.10.1. `Object.keys()` Looping Over Property Names
+
+Use `Object.keys(obj)` to get an array of property names (keys):
+
+```js
+const openingHours = {
+  tue: { open: 12, close: 22 },
+  fri: { open: 11, close: 23 },
+  sat: { open: 0, close: 24 },
+};
+
+for (const day of Object.keys(openingHours)) {
+  console.log(day);
+}
+// Output:
+// tue
+// fri
+// sat
+```
+
+You can also store the keys and build a dynamic message:
+
+```js
+const properties = Object.keys(openingHours);
+console.log(properties); // ["tue", "fri", "sat"]
+
+let openStr = `We are open on ${properties.length} days: `;
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+// Output: "We are open on 3 days: tue, fri, sat, "
+```
+
+### 5.10.2. `Object.values()` Looping Over Property Values
+
+Use `Object.values(obj)` to get an array of values:
+
+```js
+const values = Object.values(openingHours);
+console.log(values);
+// Output:
+// [
+//   { open: 12, close: 22 },
+//   { open: 11, close: 23 },
+//   { open: 0, close: 24 },
+// ]
+```
+
+### 5.10.3. `Object.entries()` Looping Over Key–Value Pairs
+
+Use `Object.entries(obj)` to get an array of `[key, value]` pairs:
+
+```js
+const entries = Object.entries(openingHours);
+console.log(entries);
+// Output:
+// [
+//   ["tue", { open: 12, close: 22 }],
+//   ["fri", { open: 11, close: 23 }],
+//   ["sat", { open: 0, close: 24 }],
+// ]
+```
+
+You can destructure both the key and the value in a loop:
+
+```js
+for (const [day, { open, close }] of entries) {
+  console.log(`On ${day}, we open at ${open} and close at ${close}`);
+}
+// Output:
+// On tue, we open at 12 and close at 22
+// On fri, we open at 11 and close at 23
+// On sat, we open at 0 and close at 24
+```
+
+## 5.11. Sets _(ES6+)_
+
+A **Set** is a collection of **unique values**. The order of elements is irrelevant, and duplicates are automatically removed.
+
+### 5.11.1. Creating a Set
+
+```js
+// Create a Set from an array by providing any iterable
+const ordersSet = new Set([
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Risotto",
+  "Pasta",
+  "Pizza",
+]);
+
+console.log(ordersSet); // Set(3) {"Pasta", "Pizza", "Risotto"}
+
+// A string is iterable, so this also works:
+console.log(new Set("Jonas")); // Set(5) {"J", "o", "n", "a", "s"}
+```
+
+### 5.11.2. Set Properties & Methods
+
+```js
+console.log(ordersSet.size); // 3
+console.log(ordersSet.has("Pizza")); // true
+console.log(ordersSet.has("Bread")); // false
+
+ordersSet.add("Garlic Bread");
+ordersSet.add("Garlic Bread"); // Duplicate - ignored
+console.log(ordersSet); // Set(4) {"Pasta", "Pizza", "Risotto", "Garlic Bread"}
+
+ordersSet.delete("Risotto");
+console.log(ordersSet); // Set(3) {"Pasta", "Pizza", "Garlic Bread"}
+
+console.log(ordersSet[0]); // undefined (no index-based access)
+
+ordersSet.clear();
+console.log(ordersSet); // Set(0) {}
+```
+
+### 5.11.3. Iterating Over a Set
+
+```js
+const sampleSet = new Set(["Tea", "Coffee", "Juice"]);
+for (const item of sampleSet) console.log(item);
+// Output:
+// Tea
+// Coffee
+// Juice
+```
+
+### 5.11.4. Use Case: Removing Duplicates from an Array
+
+```js
+const staff = ["Waiter", "Chef", "Waiter", "Manager", "Chef", "Waiter"];
+
+const staffUnique = new Set(staff);
+console.log(staffUnique); // Set(3) {"Waiter", "Chef", "Manager"}
+
+// Convert back to array using spread operator
+const staffUniqueArr = [...staffUnique];
+console.log(staffUniqueArr); // ["Waiter", "Chef", "Manager"]
+
+// Count number of unique roles
+console.log(new Set(staff).size); // 3
+
+// Count unique characters in a string
+console.log(new Set("jonasschmedtmann").size); // 11
+```
+
+### 5.11.5. New Set Operations _(ES2025)_
+
+> ⚠️ **Note:** These methods require support for **ES2025** (ECMAScript 2025). Ensure you are using a **modern browser** that supports these experimental features.
+
+The new `Set` operations introduced in ES2025 provide native methods for performing common set-theory operations such as **intersection**, **union**, **difference**, and more. These simplify logic that previously required manual iteration or conversions.
+
+**Overview**:
+
+| Method                                | Description                                                           |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| `Set.prototype.union()`               | Returns a new Set containing all unique elements from both sets.      |
+| `Set.prototype.intersection()`        | Returns a new Set with only elements present in both sets.            |
+| `Set.prototype.difference()`          | Returns a new Set with elements from the first set not in the second. |
+| `Set.prototype.symmetricDifference()` | Returns a new Set with elements exclusive to each set (not shared).   |
+| `Set.prototype.isDisjointFrom()`      | Returns `true` if the two sets have no elements in common.            |
+| `Set.prototype.isSubsetOf()`          | Returns `true` if the set is fully contained within another set.      |
+| `Set.prototype.isSupersetOf()`        | Returns `true` if the set fully contains another set.                 |
+
+---
+
+#### 5.11.5.1. Intersection
+
+```js
+const italianFoods = new Set([
+  "pasta",
+  "gnocchi",
+  "tomatoes",
+  "olive oil",
+  "garlic",
+  "basil",
+]);
+const mexicanFoods = new Set([
+  "tortillas",
+  "beans",
+  "rice",
+  "tomatoes",
+  "avocado",
+  "garlic",
+]);
+
+const commonFoods = italianFoods.intersection(mexicanFoods);
+console.log(commonFoods); // Set {"tomatoes", "garlic"}
+```
+
+#### 5.11.5.2. Union
+
+```js
+const italianMexicanFusion = italianFoods.union(mexicanFoods);
+console.log(italianMexicanFusion);
+
+// Equivalent to:
+console.log(new Set([...italianFoods, ...mexicanFoods]));
+```
+
+#### 5.11.5.3. Difference
+
+```js
+const onlyItalian = italianFoods.difference(mexicanFoods);
+console.log(onlyItalian); // Set {"pasta", "gnocchi", "olive oil", "basil"}
+
+const onlyMexican = mexicanFoods.difference(italianFoods);
+console.log(onlyMexican); // Set {"tortillas", "beans", "rice", "avocado"}
+```
+
+#### 5.11.5.4. Symmetric Difference
+
+```js
+const uniqueToEach = italianFoods.symmetricDifference(mexicanFoods);
+console.log(uniqueToEach);
+// Set {"pasta", "gnocchi", "olive oil", "basil", "tortillas", "beans", "rice", "avocado"}
+```
+
+#### 5.11.5.5. Disjoint Check
+
+```js
+console.log(italianFoods.isDisjointFrom(mexicanFoods)); // false
+```
+
+#### 5.11.5.6. Subset and Superset Checks
+
+```js
+const herbs = new Set(["garlic", "basil"]);
+console.log(herbs.isSubsetOf(italianFoods)); // true
+console.log(italianFoods.isSupersetOf(herbs)); // true
+```
+
+## 5.12. Maps _(ES6+)_
+
+A `Map` is a built-in JavaScript object that stores **key–value pairs** where keys can be of **any data type** (unlike `Object`, which only accepts strings or symbols). Maps preserve insertion order and provide convenient methods for manipulation.
+
+---
+
+### 5.12.1. Creating and Modifying Maps
+
+```js
+const rest = new Map();
+
+rest.set("name", "Classico Italiano");
+rest.set(1, "Firenze, Italy");
+rest.set(2, "Lisbon, Portugal");
+
+rest
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are open :D")
+  .set(false, "We are closed :(");
+```
+
+> The `.set()` method returns the map itself, enabling **method chaining**.
+
+---
+
+### 5.12.2. Reading and Using Values
+
+```js
+console.log(rest.get("name")); // "Classico Italiano"
+console.log(rest.get(true)); // "We are open :D"
+console.log(rest.get(1)); // "Firenze, Italy"
+
+const time = 21;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+// "We are open :D"
+```
+
+---
+
+### 5.12.3. Core Map Methods
+
+```js
+rest.has("categories"); // true
+rest.delete(2); // removes the key 2
+rest.size; // number of entries
+rest.clear(); // removes all entries
+```
+
+---
+
+### 5.12.4. Key Identity
+
+```js
+rest.set([1, 2], "Test");
+console.log(rest.get([1, 2])); // undefined – different reference
+```
+
+To make it work, store the reference:
+
+```js
+const arr = [1, 2];
+rest.set(arr, "Test");
+console.log(rest.get(arr)); // "Test"
+```
+
+---
+
+### 5.12.5. Using DOM Elements as Keys
+
+```js
+rest.set(document.querySelector("h1"), "Heading");
+```
+
+Useful when associating data with specific UI components.
+
+---
+
+### 5.12.6. Iteration and Use Cases
+
+Maps support full iteration and conversion from/to other formats:
+
+```js
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Correct 🎉"],
+  [false, "Try again 😢"],
+]);
+
+console.log(question.get("question"));
+
+for (const [key, value] of question) {
+  if (typeof key === "number") console.log(`Answer ${key}: ${value}`);
+}
+
+const answer = Number(prompt("Your answer"));
+console.log(question.get(question.get("correct") === answer));
+```
+
+---
+
+### 5.12.7. Converting Between Maps and Objects
+
+From object to map:
+
+```js
+const hoursMap = new Map(Object.entries(openingHours));
+```
+
+From map to array:
+
+```js
+console.log([...question]); // All entries
+console.log([...question.keys()]); // Keys only
+console.log([...question.values()]); // Values only
+```
+
+# 6. 🐛 JavaScript Quirks
+
+This section is personal — it includes things I found strange or surprising while working with JavaScript.
+
+## 6.1. Console Logs Capture References, Not Values
+
+In modern browsers (e.g. Chrome DevTools), `console.log()` captures a **reference** to the object at the time of logging — _not_ the exact value snapshot.
+
+This means:
+
+- The object you see when you **expand the log** is its **current state**, not the state when `console.log()` was called.
+- This can be confusing when debugging — especially if the object is mutated later in the code.
+
+**Example:**
+
+```js
+const arr = [[1], [2]];
+console.log(arr); // Shows 2 arrays with 1 element each (at that time)
+
+arr[0].push("changed");
+arr[1].push("also changed");
+
+// Expanding the first log *now* shows updated arrays with 2 elements each
+```
+
+So even if the log appears "above" in the console, expanding it shows the object _as it is now_, not as it was.
+
+**✅ Fix: Log a Snapshot of the Value**
+
+To log the actual value at the time of logging (instead of a reference), make a **deep copy**.
+
+**Use `structuredClone()`:**
+
+```js
+console.log(structuredClone(arr));
+```
+
+**Alternatives for compatibility:**
+
+```js
+// Shallow copy
+console.log(arr.map((inner) => [...inner]));
+
+// JSON fallback
+console.log(JSON.parse(JSON.stringify(arr)));
 ```
