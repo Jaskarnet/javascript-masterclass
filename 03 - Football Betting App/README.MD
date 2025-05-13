@@ -16,6 +16,14 @@ Work with arrays and objects to extract and manipulate player data and betting o
 
 Analyze game results, calculate averages, and present match data in a clean, dynamic way.
 
+### 💡 Challenge #3 – Game Events & Logging
+
+Work with a `Map`, remove and format events, and calculate average timings.
+
+### 💡 Challenge #4 – camelCase Converter
+
+Receive a list of variable names in `underscore_case` and convert them to `camelCase`, formatting the output nicely.
+
 ---
 
 ## 🧠 Concepts Practiced
@@ -24,9 +32,8 @@ Analyze game results, calculate averages, and present match data in a clean, dyn
 - Spread and rest syntax
 - Logical assignment and short-circuiting
 - Iterating with `for...of`, `entries()`, and `Object` methods
-- Optional chaining and dynamic property access
-
----
+- Using `Map`, `Set`, and working with DOM elements
+- Basic string manipulation and formatting
 
 ## 🏆 Challenge #1 – Team Setup & Odds
 
@@ -131,6 +138,78 @@ for (const player of game.scored) {
   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
+```
+
+## ⏱ Challenge #3 – Game Events & Logging
+
+### ✅ Tasks
+
+1. Create an array `events` of unique game events (no duplicates).
+2. Remove the unfair yellow card at minute 64.
+3. Calculate average time between events.
+4. Log each event with indication of `FIRST HALF` or `SECOND HALF`.
+
+### 🔍 Code Snippets
+
+```js
+const events = [...new Set(gameEvents.values())];
+gameEvents.delete(64);
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+for (const [minute, event] of gameEvents) {
+  const half = minute <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[${half} HALF] ${minute}: ${event}`);
+}
+```
+
+---
+
+## ✍️ Challenge #4 – camelCase Converter
+
+### ✅ Tasks
+
+1. Create a textarea and button in the DOM.
+2. On button click, read the textarea value line-by-line.
+3. Convert each variable name from `underscore_case` to `camelCase`.
+4. Format output: pad to 20 characters and append ✅ emojis based on line number.
+
+### 📋 Test Input Example
+
+```
+underscore_case
+ first_name
+Some_Variable
+  calculate_AGE
+delayed_departure
+```
+
+### 💻 Output
+
+```
+underscoreCase       ✅
+firstName            ✅✅
+someVariable         ✅✅✅
+calculateAge         ✅✅✅✅
+delayedDeparture     ✅✅✅✅✅
+```
+
+### 🔍 Code Snippet
+
+```js
+function listCamelCase() {
+  const text = document.querySelector('textarea').value;
+  for (const [index, row] of text.split('\n').entries()) {
+    const [first, ...rest] = row.toLowerCase().trim().split('_');
+    for (const [i, word] of rest.entries()) {
+      rest[i] = word[0].toUpperCase() + word.slice(1);
+    }
+    console.log(
+      (first + rest.join('')).padEnd(20, ' ') + '✅'.repeat(index + 1)
+    );
+  }
+}
 ```
 
 ---

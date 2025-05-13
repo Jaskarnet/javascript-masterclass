@@ -131,7 +131,7 @@
     - [5.10.1. `Object.keys()` Looping Over Property Names](#5101-objectkeys-looping-over-property-names)
     - [5.10.2. `Object.values()` Looping Over Property Values](#5102-objectvalues-looping-over-property-values)
     - [5.10.3. `Object.entries()` Looping Over Key–Value Pairs](#5103-objectentries-looping-over-keyvalue-pairs)
-  - [5.11. Sets _(ES6+)_](#511-sets-es6)
+  - [5.11. 🗃️ Sets _(ES6+)_](#511-️-sets-es6)
     - [5.11.1. Creating a Set](#5111-creating-a-set)
     - [5.11.2. Set Properties \& Methods](#5112-set-properties--methods)
     - [5.11.3. Iterating Over a Set](#5113-iterating-over-a-set)
@@ -143,7 +143,7 @@
       - [5.11.5.4. Symmetric Difference](#51154-symmetric-difference)
       - [5.11.5.5. Disjoint Check](#51155-disjoint-check)
       - [5.11.5.6. Subset and Superset Checks](#51156-subset-and-superset-checks)
-  - [5.12. Maps _(ES6+)_](#512-maps-es6)
+  - [5.12. 🗺️ Maps _(ES6+)_](#512-️-maps-es6)
     - [5.12.1. Creating and Modifying Maps](#5121-creating-and-modifying-maps)
     - [5.12.2. Reading and Using Values](#5122-reading-and-using-values)
     - [5.12.3. Core Map Methods](#5123-core-map-methods)
@@ -151,6 +151,24 @@
     - [5.12.5. Using DOM Elements as Keys](#5125-using-dom-elements-as-keys)
     - [5.12.6. Iteration and Use Cases](#5126-iteration-and-use-cases)
     - [5.12.7. Converting Between Maps and Objects](#5127-converting-between-maps-and-objects)
+  - [5.13. 📌 Which Data Structure to Use?](#513--which-data-structure-to-use)
+    - [5.13.1. Sources of Data](#5131-sources-of-data)
+    - [5.13.2. Arrays vs Sets](#5132-arrays-vs-sets)
+    - [5.13.3. Objects vs Maps](#5133-objects-vs-maps)
+  - [5.14. 🔤 Strings](#514--strings)
+    - [5.14.1. Accessing Characters](#5141-accessing-characters)
+    - [5.14.2. Length](#5142-length)
+    - [5.14.3. Searching](#5143-searching)
+    - [5.14.4. Slicing Strings](#5144-slicing-strings)
+    - [5.14.5. Behind the Scenes: Boxing](#5145-behind-the-scenes-boxing)
+    - [5.14.6. Changing Case](#5146-changing-case)
+    - [5.14.7. Trimming and Normalizing](#5147-trimming-and-normalizing)
+    - [5.14.8. Replacing](#5148-replacing)
+    - [5.14.9. Booleans](#5149-booleans)
+    - [5.14.10. Splitting and Joining](#51410-splitting-and-joining)
+    - [5.14.11. Padding](#51411-padding)
+    - [5.14.12. Repeat](#51412-repeat)
+    - [5.14.13. Tip: Searching String Methods](#51413-tip-searching-string-methods)
 - [6. 🐛 JavaScript Quirks](#6--javascript-quirks)
   - [6.1. Console Logs Capture References, Not Values](#61-console-logs-capture-references-not-values)
 
@@ -2545,7 +2563,7 @@ for (const [day, { open, close }] of entries) {
 // On sat, we open at 0 and close at 24
 ```
 
-## 5.11. Sets _(ES6+)_
+## 5.11. 🗃️ Sets _(ES6+)_
 
 A **Set** is a collection of **unique values**. The order of elements is irrelevant, and duplicates are automatically removed.
 
@@ -2704,7 +2722,7 @@ console.log(herbs.isSubsetOf(italianFoods)); // true
 console.log(italianFoods.isSupersetOf(herbs)); // true
 ```
 
-## 5.12. Maps _(ES6+)_
+## 5.12. 🗺️ Maps _(ES6+)_
 
 A `Map` is a built-in JavaScript object that stores **key–value pairs** where keys can be of **any data type** (unlike `Object`, which only accepts strings or symbols). Maps preserve insertion order and provide convenient methods for manipulation.
 
@@ -2825,6 +2843,247 @@ console.log([...question]); // All entries
 console.log([...question.keys()]); // Keys only
 console.log([...question.values()]); // Values only
 ```
+
+## 5.13. 📌 Which Data Structure to Use?
+
+### 5.13.1. Sources of Data
+
+Data in JavaScript can come from various sources:
+
+1. **From the program itself** – hardcoded values in source code
+   _e.g._, status messages
+
+2. **From the UI** – user input or DOM-generated content
+   _e.g._, tasks in a todo app
+
+3. **From external sources** – fetched from APIs or services
+   _e.g._, recipe objects from a database or REST API
+
+> ![Data sources diagram](image-19.png)
+
+---
+
+### 5.13.2. Arrays vs Sets
+
+**Use an _Array_ when you need:**
+
+- An **ordered** list of values (duplicates allowed)
+- To **manipulate** or iterate through data
+
+**Use a _Set_ when you need:**
+
+- A collection of **unique** values
+- **High performance** operations (e.g., checking existence)
+- To **remove duplicates** from an array
+
+---
+
+### 5.13.3. Objects vs Maps
+
+**Use an _Object_ when you need:**
+
+- To store data alongside **functions** (methods)
+- A simple key/value structure
+- Easier access via dot or bracket notation
+- Compatibility with **JSON**
+
+**Use a _Map_ when you need:**
+
+- To associate keys with values of **any data type**
+- Better **iteration** and **performance** for large sets
+- To easily determine the **size**
+- A more robust key/value pairing alternative to objects
+
+Great material — now let’s clean it up for **clarity, structure, and readability** like a well-organized documentation section. Here's your updated, **formatted and categorized version**:
+
+## 5.14. 🔤 Strings
+
+### 5.14.1. Accessing Characters
+
+```js
+const plane = "A320";
+console.log(plane[0]); // "A"
+console.log(plane[1]); // "3"
+console.log("B737"[0]); // "B"
+```
+
+### 5.14.2. Length
+
+```js
+console.log("TAP Air Portugal".length); // 16
+console.log("B737".length); // 4
+```
+
+### 5.14.3. Searching
+
+```js
+const airline = "TAP Air Portugal";
+
+console.log(airline.indexOf("r")); // 6
+console.log(airline.lastIndexOf("r")); // 10
+console.log(airline.indexOf("portugal")); // -1 (case-sensitive)
+```
+
+### 5.14.4. Slicing Strings
+
+```js
+console.log(airline.slice(4)); // "Air Portugal"
+console.log(airline.slice(4, 7)); // "Air"
+console.log(airline.slice(0, airline.indexOf(" "))); // "TAP"
+console.log(airline.slice(airline.lastIndexOf(" ") + 1)); // "Portugal"
+console.log(airline.slice(-2)); // "al"
+console.log(airline.slice(1, -1)); // "AP Air Portuga"
+```
+
+**Example: Check middle seat**
+
+```js
+const checkMiddleSeat = (seat) => {
+  const s = seat.slice(-1);
+  if (s === "B" || s === "E") console.log("You got the middle seat 😟");
+  else console.log("You got lucky");
+};
+
+checkMiddleSeat("11B");
+checkMiddleSeat("23E");
+```
+
+### 5.14.5. Behind the Scenes: Boxing
+
+Even though strings are primitives, they can use methods because JS **temporarily converts them to `String` objects**.
+
+```js
+console.log(typeof "Jonas"); // string
+console.log(typeof new String("Jonas")); // object
+console.log(typeof new String("Jonas").slice(1)); // string
+```
+
+### 5.14.6. Changing Case
+
+```js
+console.log(airline.toLowerCase()); // "tap air portugal"
+console.log(airline.toUpperCase()); // "TAP AIR PORTUGAL"
+```
+
+**Capitalization fix:**
+
+```js
+const nameFix = (name) => name[0].toUpperCase() + name.slice(1).toLowerCase();
+
+console.log(nameFix("jOnAS")); // "Jonas"
+```
+
+### 5.14.7. Trimming and Normalizing
+
+```js
+const email = "hello@jonas.io";
+const loginEmail = "   Hello@Jonas.Io \n";
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(email === normalizedEmail); // true
+```
+
+### 5.14.8. Replacing
+
+```js
+const priceGB = "288,97£";
+const priceUS = priceGB.replace("£", "$").replace(",", ".");
+console.log(priceUS); // "288.97$"
+
+const announcement =
+  "All passengers come to boarding door 23. Boarding door 23!";
+
+console.log(announcement.replace("door", "gate"));
+console.log(announcement.replaceAll("door", "gate"));
+console.log(announcement.replaceAll(/door/g, "gate")); // Regex version
+```
+
+### 5.14.9. Booleans
+
+```js
+const plane = "Airbus A320neo";
+
+console.log(plane.includes("A320")); // true
+console.log(plane.startsWith("Air")); // true
+console.log(plane.endsWith("neo")); // true
+
+if (plane.startsWith("Airbus") && plane.endsWith("neo")) {
+  console.log("Part of the NEW Airbus family");
+}
+```
+
+### 5.14.10. Splitting and Joining
+
+```js
+console.log("a+very+nice+string".split("+")); // ["a", "very", "nice", "string"]
+console.log("Jonas Schmedtmann".split(" ")); // ["Jonas", "Schmedtmann"]
+
+const [firstName, lastName] = "Jonas Schmedtmann".split(" ");
+const newName = ["Mr", firstName, lastName.toUpperCase()].join(" ");
+console.log(newName); // "Mr Jonas SCHMEDTMANN"
+```
+
+**Capitalize each name in a string:**
+
+```js
+const capitalizeName = (name) => {
+  const names = name.split(" ");
+  const namesUpper = names.map(
+    (n) => n[0].toUpperCase() + n.slice(1).toLowerCase()
+  );
+  console.log(namesUpper.join(" "));
+};
+
+capitalizeName("jessica ann smith davis");
+// "Jessica Ann Smith Davis"
+```
+
+### 5.14.11. Padding
+
+```js
+const message = "Go to gate 23!";
+console.log(message.padStart(25, "+").padEnd(30, "+"));
+// "+++++++++++Go to gate 23!+++++"
+```
+
+**Mask a credit card:**
+
+```js
+const maskCreditCard = (number) => {
+  const str = number + "";
+  const last = str.slice(-4);
+  return last.padStart(str.length, "*");
+};
+
+console.log(maskCreditCard(1234567890123)); // "*********0123"
+```
+
+### 5.14.12. Repeat
+
+```js
+const message2 = "Bad weather... All Departures Delayed... ";
+console.log(message2.repeat(5));
+```
+
+**Example function:**
+
+```js
+const planesInLine = (n) => {
+  console.log(`There are ${n} planes in line ${"🛩️".repeat(n)}`);
+};
+
+planesInLine(5);
+```
+
+### 5.14.13. Tip: Searching String Methods
+
+To quickly find string methods, search:
+
+> 🔎 `"mdn string replace"`<br>
+> or<br>
+> 🔎 `"mdn string [methodName]"`
+
+The MDN page lists all related methods in the sidebar.
 
 # 6. 🐛 JavaScript Quirks
 
