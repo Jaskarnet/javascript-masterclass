@@ -37,6 +37,35 @@
     - [1.13.1. Adding elements](#1131-adding-elements)
     - [1.13.2. Removing elements](#1132-removing-elements)
     - [1.13.3. Finding elements](#1133-finding-elements)
+    - [1.13.4. `slice()` – Extracting Portions Without Mutating](#1134-slice--extracting-portions-without-mutating)
+    - [1.13.5. `splice()` – Removing/Changing Elements (Mutates Original)](#1135-splice--removingchanging-elements-mutates-original)
+    - [1.13.6. `reverse()` – Reversing Order (Mutates Original)](#1136-reverse--reversing-order-mutates-original)
+    - [1.13.7. `concat()` – Merging Arrays (Does NOT Mutate)](#1137-concat--merging-arrays-does-not-mutate)
+    - [1.13.8. `join()` – Combining Array Elements into String](#1138-join--combining-array-elements-into-string)
+    - [1.13.9. `at()` – Accessing Elements by Index (Including Negative)](#1139-at--accessing-elements-by-index-including-negative)
+    - [1.13.10. `forEach` – Looping Over Arrays](#11310-foreach--looping-over-arrays)
+    - [1.13.11. `map` – Transforming Arrays](#11311-map--transforming-arrays)
+    - [1.13.12. `filter` – Filtering Arrays](#11312-filter--filtering-arrays)
+    - [1.13.13. `reduce` – Reducing Arrays to a Single Value](#11313-reduce--reducing-arrays-to-a-single-value)
+    - [1.13.14. `find` – Finding the First Match](#11314-find--finding-the-first-match)
+    - [1.13.15. `findIndex` – Finding the Index of the First Match](#11315-findindex--finding-the-index-of-the-first-match)
+    - [1.13.16. `findLast` – Find Last Matching Element](#11316-findlast--find-last-matching-element)
+    - [1.13.17. `findLastIndex` – Index of Last Match](#11317-findlastindex--index-of-last-match)
+    - [1.13.18. `some` – At Least One Match](#11318-some--at-least-one-match)
+    - [1.13.19. `every` – All Must Match](#11319-every--all-must-match)
+    - [1.13.20. `flat` – Flattening Nested Arrays](#11320-flat--flattening-nested-arrays)
+    - [1.13.21. `flatMap` – Map + Flat](#11321-flatmap--map--flat)
+    - [1.13.22. `sort` – Sorting Arrays](#11322-sort--sorting-arrays)
+    - [1.13.23. Grouping Arrays – `Object.groupBy()`](#11323-grouping-arrays--objectgroupby)
+    - [1.13.24. Creating and Filling Arrays](#11324-creating-and-filling-arrays)
+      - [1.13.24.1. `new Array()`](#113241-new-array)
+      - [1.13.24.2. `.fill(value, start?, end?)`](#113242-fillvalue-start-end)
+      - [1.13.24.3. `Array.from(arrayLike, mapFn?, thisArg?)`](#113243-arrayfromarraylike-mapfn-thisarg)
+    - [1.13.25. Nondestructive Array Methods](#11325-nondestructive-array-methods)
+      - [1.13.25.1. `toReversed()`](#113251-toreversed)
+      - [1.13.25.2. `toSorted(compareFn?)`](#113252-tosortedcomparefn)
+      - [1.13.25.3. `toSpliced(start, deleteCount?, ...items)`](#113253-tosplicedstart-deletecount-items)
+      - [1.13.25.4. `with(index, value)`](#113254-withindex-value)
   - [1.14. 🧱 Objects](#114--objects)
     - [1.14.1. Dot vs. Bracket Notation](#1141-dot-vs-bracket-notation)
     - [1.14.2. Object Methods](#1142-object-methods)
@@ -58,6 +87,19 @@
     - [4.1.3. Multi-paradigm](#413-multi-paradigm)
     - [4.1.4. Procedural](#414-procedural)
     - [4.1.5. Object-Oriented Programming (OOP)](#415-object-oriented-programming-oop)
+      - [4.1.5.1. Abstraction](#4151-abstraction)
+      - [4.1.5.2. Encapsulation](#4152-encapsulation)
+      - [4.1.5.3. Inheritance](#4153-inheritance)
+      - [4.1.5.4. Polymorphism](#4154-polymorphism)
+      - [4.1.5.5. OOP in JS: Prototypes](#4155-oop-in-js-prototypes)
+      - [4.1.5.6. Constructor functions](#4156-constructor-functions)
+      - [4.1.5.7. ES6 Classes](#4157-es6-classes)
+      - [4.1.5.8. `Object.create()`](#4158-objectcreate)
+      - [4.1.5.9. Getters and Setters](#4159-getters-and-setters)
+      - [4.1.5.10. Static Methods](#41510-static-methods)
+      - [4.1.5.11. Inheritence between "Classes": Constructor Functions](#41511-inheritence-between-classes-constructor-functions)
+      - [4.1.5.12. Private Class Fields and Methods (ES2022+)](#41512-private-class-fields-and-methods-es2022)
+      - [4.1.5.13. Summary](#41513-summary)
     - [4.1.6. Functional Programming (FP)](#416-functional-programming-fp)
     - [4.1.7. Prototype-based object-oriented approach](#417-prototype-based-object-oriented-approach)
     - [4.1.8. First-class Functions](#418-first-class-functions)
@@ -149,7 +191,7 @@
     - [5.12.3. Core Map Methods](#5123-core-map-methods)
     - [5.12.4. Key Identity](#5124-key-identity)
     - [5.12.5. Using DOM Elements as Keys](#5125-using-dom-elements-as-keys)
-    - [5.12.6. Iteration and Use Cases](#5126-iteration-and-use-cases)
+    - [5.12.6. Iterating Over a Map](#5126-iterating-over-a-map)
     - [5.12.7. Converting Between Maps and Objects](#5127-converting-between-maps-and-objects)
   - [5.13. 📌 Which Data Structure to Use?](#513--which-data-structure-to-use)
     - [5.13.1. Sources of Data](#5131-sources-of-data)
@@ -169,8 +211,21 @@
     - [5.14.11. Padding](#51411-padding)
     - [5.14.12. Repeat](#51412-repeat)
     - [5.14.13. Tip: Searching String Methods](#51413-tip-searching-string-methods)
-- [6. 🐛 JavaScript Quirks](#6--javascript-quirks)
-  - [6.1. Console Logs Capture References, Not Values](#61-console-logs-capture-references-not-values)
+- [6. Functions](#6-functions)
+  - [6.1. Default Parameters (ES6+)](#61-default-parameters-es6)
+  - [6.2. Value vs Reference](#62-value-vs-reference)
+  - [6.3. First-Class and Higher-Order Functions](#63-first-class-and-higher-order-functions)
+    - [6.3.1. First-Class Functions](#631-first-class-functions)
+    - [6.3.2. Higher-Order Functions](#632-higher-order-functions)
+  - [6.4. The `call`, `apply`, and `bind` Methods](#64-the-call-apply-and-bind-methods)
+    - [6.4.1. `call()` Method](#641-call-method)
+    - [6.4.2. `apply()` Method](#642-apply-method)
+    - [6.4.3. `bind()` Method](#643-bind-method)
+    - [6.4.4. Summary Table](#644-summary-table)
+  - [6.5. Immediately Invoked Function Expressions (IIFE)](#65-immediately-invoked-function-expressions-iife)
+  - [6.6. Closures](#66-closures)
+- [7. 🐛 JavaScript Quirks](#7--javascript-quirks)
+  - [7.1. Console Logs Capture References, Not Values](#71-console-logs-capture-references-not-values)
 
 # 1. Fundamentals
 
@@ -643,6 +698,12 @@ console.log("Hello " + [1, 2, 3]); // "Hello 1,2,3"
 console.log("Hello" - [1, 2, 3]); // NaN
 ```
 
+**Array Methods**
+
+![alt text](images/image-21.png)
+
+![alt text](images/image-22.png)
+
 ### 1.13.1. Adding elements
 
 ```js
@@ -691,6 +752,525 @@ The `includes` method is useful for conditionals.
 if (friends.includes("Peter")) {
   console.log("You have a friend called Peter!");
 }
+```
+
+### 1.13.4. `slice()` – Extracting Portions Without Mutating
+
+Returns a **shallow copy** of a portion of an array without modifying the original.
+
+```js
+let arr = ["a", "b", "c", "d", "e"];
+
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-1)); // ['e']
+console.log(arr.slice(1, -1)); // ['b', 'c', 'd']
+console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e'] (shallow copy)
+console.log([...arr]); // same as slice()
+```
+
+### 1.13.5. `splice()` – Removing/Changing Elements (Mutates Original)
+
+Modifies the original array by removing or replacing elements.
+
+```js
+console.log(arr.splice(2)); // ['c', 'd', 'e']
+console.log(arr); // ['a', 'b']
+
+arr = ["a", "b", "c", "d", "e"];
+console.log(arr.splice(-1)); // ['e']
+console.log(arr); // ['a', 'b', 'c', 'd']
+```
+
+Use `splice()` when you want to **remove elements permanently** from an array.
+
+---
+
+### 1.13.6. `reverse()` – Reversing Order (Mutates Original)
+
+```js
+const arr2 = ["j", "i", "h", "g", "f"];
+console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+console.log(arr2); // ['f', 'g', 'h', 'i', 'j']
+```
+
+Mutates the original array. Useful for reversing strings split into arrays, etc.
+
+---
+
+### 1.13.7. `concat()` – Merging Arrays (Does NOT Mutate)
+
+```js
+const letters = arr.concat(arr2);
+console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+console.log([...arr, ...arr2]); // same result using spread operator
+```
+
+Use `concat()` or the spread operator to merge arrays without changing the original ones.
+
+---
+
+### 1.13.8. `join()` – Combining Array Elements into String
+
+```js
+console.log(letters.join(" - ")); // 'a - b - c - d - e - f - g - h - i - j'
+```
+
+Useful for converting arrays into a readable string format.
+
+### 1.13.9. `at()` – Accessing Elements by Index (Including Negative)
+
+The `at()` method allows you to get an element at a specific index, supporting **negative indexing** to access elements from the end.
+
+```js
+const arr = ["a", "b", "c", "d", "e"];
+
+// Access first element
+console.log(arr[0]); // 'a'
+console.log(arr.at(0)); // 'a'
+
+// Access last element in various ways
+console.log(arr[arr.length - 1]); // 'e'
+console.log(arr.slice(-1)[0]); // 'e'
+console.log(arr.at(-1)); // 'e'
+
+// Access second to last element
+console.log(arr.at(-2)); // 'd'
+```
+
+`at()` is a cleaner and more intuitive way to access elements from the end compared to the traditional `arr[arr.length - 1]` pattern.
+
+### 1.13.10. `forEach` – Looping Over Arrays
+
+The `forEach` method provides a clean way to execute a callback function for each element in an array.
+
+```js
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Classic for-of loop
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log("-----------------------");
+
+// Using forEach method
+movements.forEach(function (movement) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+});
+```
+
+Both loops achieve the same, but `forEach` takes a callback and is often preferred for cleaner code.
+
+---
+
+**Using Index with `forEach` and `entries()`**
+
+To access the current index along with the element:
+
+```js
+// Using for-of loop with entries()
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log("-----------------------");
+
+// Using forEach's second argument (index)
+movements.forEach(function (mov, i) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+```
+
+Note: You **cannot** break out of a `forEach` loop early — it will always iterate over all elements.
+
+### 1.13.11. `map` – Transforming Arrays
+
+The `map` method returns a **new array** by applying a callback function to **each element**.
+
+```js
+const eurToUsd = 1.1;
+const movements = [200, 450, -400, 3000];
+
+// All parameters: element, index, array
+const movementsUSD = movements.map(function (mov, i, arr) {
+  console.log(`Index ${i}: ${mov}, from [${arr}]`);
+  return mov * eurToUsd;
+});
+
+console.log(movementsUSD); // [220, 495, -440, 3300]
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – the original array
+
+### 1.13.12. `filter` – Filtering Arrays
+
+The `filter` method returns a **new array** with elements that pass the test in the provided function.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+// All parameters: element, index, array
+const deposits = movements.filter(function (mov, i, arr) {
+  console.log(`Index ${i}: ${mov}, from [${arr}]`);
+  return mov > 0;
+});
+
+console.log(deposits); // [200, 450, 3000]
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – the original array
+
+### 1.13.13. `reduce` – Reducing Arrays to a Single Value
+
+The `reduce` method applies a function to each element and **accumulates a single result**.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+// All parameters: accumulator, current element, index, array
+const balance = movements.reduce(function (acc, mov, i, arr) {
+  console.log(`Step ${i}: acc = ${acc}, mov = ${mov}`);
+  return acc + mov;
+}, 0); // initial value
+
+console.log(balance); // 2600
+```
+
+- `acc` – accumulator (result from the previous iteration)
+- `mov` – current element
+- `i` – index
+- `arr` – the original array
+
+### 1.13.14. `find` – Finding the First Match
+
+`find(callback)` returns **the first element** that matches the condition.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+const firstWithdrawal = movements.find(function (mov, i, arr) {
+  return mov < 0;
+});
+
+console.log(firstWithdrawal); // -400
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+Only returns the **first** matching element (not an array).
+
+### 1.13.15. `findIndex` – Finding the Index of the First Match
+
+`findIndex(callback)` returns **the index** of the first element that matches the condition.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+const index = movements.findIndex(function (mov, i, arr) {
+  return mov < 0;
+});
+
+console.log(index); // 2
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+If no match is found, it returns `-1`.
+
+### 1.13.16. `findLast` – Find Last Matching Element
+
+Returns the **last** element that satisfies the condition.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+const lastWithdrawal = movements.findLast(function (mov, i, arr) {
+  return mov < 0;
+});
+
+console.log(lastWithdrawal); // -650
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+### 1.13.17. `findLastIndex` – Index of Last Match
+
+Returns the **index** of the last element that satisfies the condition.
+
+```js
+const index = movements.findLastIndex(function (mov, i, arr) {
+  return mov < 0;
+});
+
+console.log(index); // 4
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+If nothing matches, both methods return `undefined` or `-1`.
+
+Here are concise versions for `some` and `every`, including all parameters:
+
+---
+
+### 1.13.18. `some` – At Least One Match
+
+Returns `true` if **any** element satisfies the condition.
+
+```js
+const movements = [200, 450, -400, 3000, -650];
+
+const hasWithdrawal = movements.some(function (mov, i, arr) {
+  return mov < 0;
+});
+
+console.log(hasWithdrawal); // true
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+### 1.13.19. `every` – All Must Match
+
+Returns `true` only if **every** element satisfies the condition.
+
+```js
+const allDeposits = movements.every(function (mov, i, arr) {
+  return mov > 0;
+});
+
+console.log(allDeposits); // false
+```
+
+- `mov` – current element
+- `i` – index
+- `arr` – original array
+
+If even one check fails, `every` returns `false`.
+
+### 1.13.20. `flat` – Flattening Nested Arrays
+
+Flattens nested arrays into a single array up to the specified depth (default is `1`).
+
+```js
+const arr = [1, 2, [3, 4], [5, [6, 7]]];
+console.log(arr.flat()); // [1, 2, 3, 4, 5, [6, 7]]
+console.log(arr.flat(2)); // [1, 2, 3, 4, 5, 6, 7]
+```
+
+### 1.13.21. `flatMap` – Map + Flat
+
+Combines `map()` and `flat()` (with depth `1`) in a single method.
+
+```js
+const arr = [2, 3, 4];
+const result = arr.flatMap(function (x, i, arr) {
+  return [x, x * 2];
+});
+
+console.log(result); // [2, 4, 3, 6, 4, 8]
+```
+
+- `x` – current element
+- `i` – index
+- `arr` – original array
+
+### 1.13.22. `sort` – Sorting Arrays
+
+The `sort()` method arranges array elements **in place** and **modifies the original array**. By default, it converts elements to strings and sorts them in Unicode order.
+
+```js
+const letters = ["b", "a", "c"];
+letters.sort();
+console.log(letters); // ['a', 'b', 'c']
+```
+
+**Sorting Numbers Correctly**
+
+Use a compare function to sort numbers numerically.
+
+```js
+const nums = [10, 5, 1, 20];
+
+// Ascending
+nums.sort((a, b) => a - b);
+console.log(nums); // [1, 5, 10, 20]
+
+// Descending
+nums.sort((a, b) => b - a);
+console.log(nums); // [20, 10, 5, 1]
+```
+
+**Parameters of compare function**:
+
+- `a`, `b`: current pair of elements being compared.
+- Returns:
+
+  - `< 0`: a comes before b
+  - `> 0`: b comes before a
+  - `0`: keep original order
+
+**Note:** `sort()` returns the sorted array but also **mutates** the original one.
+
+### 1.13.23. Grouping Arrays – `Object.groupBy()`
+
+`Object.groupBy()` groups array items into an object based on a callback function. It returns a new object and **does not mutate** the original array.
+
+```js
+const people = [
+  { name: 'Alice', age: 20 },
+  { name: 'Bob', age: 25 },
+  { name: 'Carol', age: 20 },
+];
+
+const grouped = Object.groupBy(people, person => person.age);
+console.log(grouped);
+/*
+{
+  20: [
+    { name: 'Alice', age: 20 },
+    { name: 'Carol', age: 20 }
+  ],
+  25: [
+    { name: 'Bob', age: 25 }
+  ]
+}
+```
+
+**Parameters of callback**:
+
+- `element`: the current array item
+- `index` (optional)
+- `array` (optional)
+
+Returns a **plain object** with keys from the return value of the callback.
+
+### 1.13.24. Creating and Filling Arrays
+
+#### 1.13.24.1. `new Array()`
+
+Creates an array with empty slots (no values yet).
+
+```js
+const x = new Array(5);
+console.log(x); // [empty × 5]
+```
+
+Useful when combining with `.fill()` or `.from()`.
+
+#### 1.13.24.2. `.fill(value, start?, end?)`
+
+Fills array slots with a static value. Modifies the array.
+
+```js
+x.fill(1); // Fill all with 1
+console.log(x); // [1, 1, 1, 1, 1]
+
+x.fill(23, 2, 4); // Fill with 23 from index 2 to 3
+console.log(x); // [1, 1, 23, 23, 1]
+```
+
+**Parameters**:
+
+- `value`: what to fill
+- `start` (optional): start index (default `0`)
+- `end` (optional): end index (non-inclusive, default `arr.length`)
+
+#### 1.13.24.3. `Array.from(arrayLike, mapFn?, thisArg?)`
+
+Creates a new array from any iterable or array-like value. Optional map function can apply transformation.
+
+```js
+const y = Array.from({ length: 5 }, () => 1);
+console.log(y); // [1, 1, 1, 1, 1]
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z); // [1, 2, 3, 4, 5, 6, 7]
+```
+
+**Parameters**:
+
+- `arrayLike`: length-based or iterable object
+- `mapFn` (optional): mapping function (element, index)
+- `thisArg` (optional): value of `this` in mapFn
+
+`Array.from()` does **not mutate** anything; it creates a fresh array.
+
+### 1.13.25. Nondestructive Array Methods
+
+These new methods return a **new array** without modifying the original.
+
+#### 1.13.25.1. `toReversed()`
+
+Returns a reversed copy of the array.
+
+```js
+const arr = [1, 2, 3];
+const reversed = arr.toReversed();
+console.log(reversed); // [3, 2, 1]
+console.log(arr); // [1, 2, 3] original unchanged
+```
+
+#### 1.13.25.2. `toSorted(compareFn?)`
+
+Returns a sorted copy of the array.
+
+```js
+const nums = [3, 1, 4];
+const sorted = nums.toSorted();
+console.log(sorted); // [1, 3, 4]
+console.log(nums); // [3, 1, 4] original unchanged
+```
+
+#### 1.13.25.3. `toSpliced(start, deleteCount?, ...items)`
+
+Returns a copy with splicing applied (insertions/removals), original unchanged.
+
+```js
+const letters = ["a", "b", "c", "d"];
+const spliced = letters.toSpliced(1, 2, "x", "y");
+console.log(spliced); // ['a', 'x', 'y', 'd']
+console.log(letters); // ['a', 'b', 'c', 'd'] original unchanged
+```
+
+#### 1.13.25.4. `with(index, value)`
+
+Returns a copy with the element at `index` replaced by `value`.
+
+```js
+const nums = [10, 20, 30];
+const replaced = nums.with(1, 99);
+console.log(replaced); // [10, 99, 30]
+console.log(nums); // [10, 20, 30] original unchanged
 ```
 
 ## 1.14. 🧱 Objects
@@ -1007,6 +1587,338 @@ We can classify paradigms as **imperative** or **declarative**.
 
 ### 4.1.5. Object-Oriented Programming (OOP)
 
+#### 4.1.5.1. Abstraction
+
+Ignoring or hiding details that **don't matter**, allowing us to get an **overview** perspective of the thing we're implementing, instead of messing with details that don't really matter to our implementation.
+
+#### 4.1.5.2. Encapsulation
+
+Keeping properties and methods **private** inside the class, so they are **not accessible from outside class**. Some methods can be **exposed** as a public interface (API).
+
+#### 4.1.5.3. Inheritance
+
+Making all properties and methods of a certain class **available to a child class**, forming a hierarchical relationship between classes. This allows us to **reuse common logic** and to model real-world relationships.
+
+#### 4.1.5.4. Polymorphism
+
+A child class can **overwrite** a method it inherited from a parent class (it's more complex but that's enough for most cases).
+
+#### 4.1.5.5. OOP in JS: Prototypes
+
+Objects are **linked** to a prototype object
+
+**Prototypal inheritence:** The prototype contains methods (behavior) that are **accessible to all objects linked to that prototype**
+
+Behavior is **delegated** to the linked prototype object (in standard OOP methods are **copied** from class to instances)
+
+![alt text](images/image-23.png)
+
+![alt text](images/image-24.png)
+
+```js
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+
+  // Bad practice - never construct a method inside a custructor function
+  //   this.calcAge = function() {
+  //     console.log(2037 - this.birthYear);
+  //   }
+};
+
+new Person("Jonas", 1991);
+// 1. New {} is created
+// 2. function is called, this = {}
+// 3. {} linked to prototype
+// 4. function automatically return {}
+
+const jonas = new Person("Jonas", 1991);
+const matilda = new Person("Matilda", 2017);
+const jack = new Person("Jack", 1975);
+
+// prototypes
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+jonas.calcAge();
+matilda.calcAge();
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype); // true
+console.log(Person.prototype.isPrototypeOf(jonas)); // true
+console.log(Person.prototype.isPrototypeOf(Person)); // false - Person.prototype is not a prototype of Person, it is however a prototype of any object created by Person's constructor
+
+Person.prototype.species = "Homo Sapiens";
+console.log(jonas.hasOwnProperty("firstName")); // true
+console.log(jonas.hasOwnProperty("species")); // false
+```
+
+#### 4.1.5.6. Constructor functions
+
+- Technique to create objects from a function
+
+- This is how built-in objects like Arrays, Maps or Sets are actually implemented
+
+#### 4.1.5.7. ES6 Classes
+
+- Modern alternative to constructor function syntax
+- "Syntactic sugar": behind the scenes, ES6 classes work **exactly** like constructor functions
+- ES6 classes do **NOT** behave like classes in _classical OOP_
+- Classes are **NOT** hoisted
+- Class are **first-class citizens** - we can pass them into functions and return them from functions, as they are just special kind of functions behind the scenes
+- Classes are executed in **strict mode** - even if we didnt activate it for the entire script all the code that is in the class will be executed in strict mode
+
+```js
+// class expression
+// const PersonCl = class {
+// }
+
+// class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+const jessica = new PersonCl("Jessica", 1996);
+console.log(jessica);
+jessica.calcAge();
+console.log(jessica.__proto__ === PersonCl.prototype); // true
+
+PersonCl.prototype.greet = function () {
+  console.log(`Hey ${this.firstName}`);
+};
+jessica.greet();
+```
+
+#### 4.1.5.8. `Object.create()`
+
+The easiest and most straightforward way of linking an object to a prototype object.
+
+```js
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  // can have any name
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const sarah = Object.create(PersonProto);
+sarah.init("Sarah", 1979);
+sarah.calcAge;
+```
+
+#### 4.1.5.9. Getters and Setters
+
+**example**:
+
+Age is something that changes in time, right? That's why we don't store the age in a property, but instead, we store the year of a person's birth, and then, calculate the age when we need it. To do so, we can have the calculateAge() function, something like this
+
+```js
+const john = {
+  name: "John",
+  lastName: "Smith",
+  yearOfBirth: 1990,
+  calculateAge: function () {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.yearOfBirth;
+  },
+};
+
+console.log(john.calculateAge()); // 30
+```
+
+It works, but do we really need to think of age as a calculation? I just want to get the age of john; I don't need to know that I must run a method to calculate it. This is one of the reasons why getters and setters exist.
+
+The same example, but with the getter
+
+```js
+const john = {
+  name: "John",
+  lastName: "Smith",
+  yearOfBirth: 1990,
+  get age() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.yearOfBirth;
+  },
+};
+
+console.log(john.age); // 30
+```
+
+The output is the same, but the way we access the age is different. I want to get the age of john, so I write john.age. I don't need to be aware of the fact that there is some calculation going on. Now, imagine you write a library that other programmers can use in their projects. You just give them documentation that states they can use the age property. They don't need to worry about how this was implemented; They just want to get the age, which naturally is perceived as property, and not some action that you need to perform.
+
+#### 4.1.5.10. Static Methods
+
+Static methods are defined on the class itself, not on instances of the class. They're often used for utility functions related to the class but not tied to any specific object.
+
+```js
+class MathHelper {
+  static add(x, y) {
+    return x + y;
+  }
+}
+
+console.log(MathHelper.add(5, 3)); // 8
+
+// MathHelper.add() can be called without creating an instance
+```
+
+Use static methods when a behavior logically belongs to the class rather than any single instance.
+
+#### 4.1.5.11. Inheritence between "Classes": Constructor Functions
+
+```js
+///////////////////////////////////////
+// Inheritance Between "Classes": Constructor Functions
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+// Student.prototype = Person.prototype - this will not create prototype chain that we need (reasoning in image below)
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student("Mike", 2020, "Computer Science");
+mike.introduce();
+mike.calcAge();
+```
+
+**Why `Student.prototype = Person.prototype` does not create proper prototype chain**
+![alt text](images/image-25.png)
+
+**ES6 classes - new way of inheritance**
+
+Key Differences from Constructor Functions
+
+- `class` syntax is cleaner and more intuitive.
+- The `super()` keyword replaces `Person.call(this, ...)` and must be called before `this` in the subclass constructor.
+- The prototype chain is automatically set up behind the scenes when using `extends`, so there's **no need for `Object.create(...)`**.
+
+```js
+///////////////////////////////////////
+// Inheritance Between "Classes": ES6 Classes
+class Person {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+class Student extends Person {
+  constructor(firstName, birthYear, course) {
+    // Call the parent constructor - need to happen first!
+    super(firstName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+  }
+}
+
+const mike = new Student("Mike", 2020, "Computer Science");
+mike.introduce();
+mike.calcAge();
+```
+
+#### 4.1.5.12. Private Class Fields and Methods (ES2022+)
+
+With this feature we are moving away from idea that classes are just syntactic sugar over constructor functions. Classes now have abilities that we didnt have previously. Originally there was no easy way of hiding properties or methods from the outside of the class or of a constructor functions. With private class fields we'll actually be able to do that. Many developers consider it a big problem as JS is prototype-based, not class-based like Java or c++.
+
+```js
+///////////////////////////////////////
+// Encapsulation: Private Class Fields and Methods
+
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// STATIC version of these 4
+
+class Account {
+  locale = navigator.language;
+  bank = "Bankist";
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    // this.movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface (API)
+  getMovements() {
+    return this.#movements; // Not chainable
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  #approveLoan(val) {
+    // Fake method
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+    return this;
+  }
+
+  static tet() {
+    console.log("TEST");
+  }
+}
+```
+
+#### 4.1.5.13. Summary
+
 ### 4.1.6. Functional Programming (FP)
 
 ### 4.1.7. Prototype-based object-oriented approach
@@ -1052,19 +1964,19 @@ By using an **event loop**: it takes long-running tasks, executes them in the ba
 
 - **Compilation** – Entire code is converted into machine code at once and written to a binary file that can be executed by a computer
 
-  ![alt text](image-1.png)
+  ![alt text](images/image-1.png)
 
 - **Interpretation** – Interpreter runs through the source code and executes it line by line
 
-  ![alt text](image-3.png)
+  ![alt text](images/image-3.png)
 
 - **Just-in-time (JIT) compilation** – Entire code is converted into machine code at once, then executed immediately
 
-  ![alt text](image-5.png)
+  ![alt text](images/image-5.png)
 
 JavaScript is JIT compiled.
 
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 ### 4.2.2. Runtime
 
@@ -1081,10 +1993,10 @@ When events happen (e.g., a click):
 This is how JavaScript’s non-blocking concurrency model is implemented.
 
 **JavaScript in the browser**:  
-![alt text](image-7.png)
+![alt text](images/image-7.png)
 
 **JavaScript in Node.js**:  
-![alt text](image-8.png)
+![alt text](images/image-8.png)
 
 ## 4.3. 🔁 Execution Contexts and the Call Stack
 
@@ -1098,7 +2010,7 @@ There is exactly **one** global execution context. Once it is finished, function
 
 When all functions are done, the engine waits for callback functions to arrive (e.g., click event handlers), which are provided by the event loop.
 
-![alt text](image-9.png)
+![alt text](images/image-9.png)
 
 ### 4.3.1. What’s inside an execution context?
 
@@ -1123,7 +2035,7 @@ Arrow functions’ execution context:
 ### 4.3.2. What is the call stack?
 
 Place where execution contexts are stacked to keep track of where we are in execution.  
-![alt text](image-10.png)
+![alt text](images/image-10.png)
 
 ### 4.3.3. Scope and Scope Chain
 
@@ -1140,14 +2052,14 @@ Place where execution contexts are stacked to keep track of where we are in exec
 - **Function** scope
 - **Block** scope
 
-![alt text](image-11.png)
+![alt text](images/image-11.png)
 
 **Scope of a variable** - Region of out code where a certain variable can be accessed
 
 Scope chain is created in order in which functions are **written in the code**. It has **nothing** to do with order in which functions were **called**!
 
 **summary**
-![alt text](image-12.png)
+![alt text](images/image-12.png)
 
 ## 4.4. 🪄 Variable Environment: Hoisting and the TDZ
 
@@ -1157,9 +2069,9 @@ Scope chain is created in order in which functions are **written in the code**. 
 
 Functions are simply variables so they behave the exact same way as variables in regards of hoisting.
 
-![alt text](image-13.png)
+![alt text](images/image-13.png)
 
-![alt text](image-14.png)
+![alt text](images/image-14.png)
 
 ## 4.5. 🔍 `this` keyword
 
@@ -1420,7 +2332,7 @@ Every value we create in JavaScript goes through a **memory lifecycle**.
          - Event Listeners and Active Timers
          - Closures
 
-         ![alt text](image-17.png)
+         ![alt text](images/image-17.png)
 
       2. **Sweep**
 
@@ -1435,17 +2347,17 @@ Every value we create in JavaScript goes through a **memory lifecycle**.
 ### 4.6.1. Reference
 
 **Example of copying by reference**
-![alt text](image-15.png)
+![alt text](images/image-15.png)
 
 If we change the value of city in newLocation it will also change the value for location as it points to the same object.
 
 **Example: changing a value via one variable affects the other due to shared reference**
-![alt text](image-16.png)
+![alt text](images/image-16.png)
 
 Functions are, behind the scenes, just objects — which means they are also stored in the heap.
 
 **Example of storing a function**
-![alt text](image-18.png)
+![alt text](images/image-18.png)
 
 ---
 
@@ -2608,14 +3520,31 @@ console.log(ordersSet); // Set(0) {}
 
 ### 5.11.3. Iterating Over a Set
 
+You can iterate over a `Set` using either a `for...of` loop or the `forEach` method.
+
 ```js
-const sampleSet = new Set(["Tea", "Coffee", "Juice"]);
-for (const item of sampleSet) console.log(item);
+const sampleSet = new Set(["USD", "GBP", "USD", "EUR", "EUR"]);
+
+// Using for...of loop
+for (const currency of sampleSet) {
+  console.log(currency);
+}
 // Output:
-// Tea
-// Coffee
-// Juice
+// USD
+// GBP
+// EUR
+
+// Using forEach method
+sampleSet.forEach(function (value, _, set) {
+  console.log(`${value}: ${value}`);
+});
+// Output:
+// USD: USD
+// GBP: GBP
+// EUR: EUR
 ```
+
+> Note: The second parameter in the `forEach` callback is ignored (`_`) because Sets don’t have keys like Maps or Objects. The third parameter is the Set itself.
 
 ### 5.11.4. Use Case: Removing Duplicates from an Array
 
@@ -2799,34 +3728,35 @@ rest.set(document.querySelector("h1"), "Heading");
 
 Useful when associating data with specific UI components.
 
----
+### 5.12.6. Iterating Over a Map
 
-### 5.12.6. Iteration and Use Cases
-
-Maps support full iteration and conversion from/to other formats:
+You can iterate over a `Map` using a `for...of` loop or the `forEach` method. Both allow you to access the key-value pairs.
 
 ```js
-const question = new Map([
-  ["question", "What is the best programming language in the world?"],
-  [1, "C"],
-  [2, "Java"],
-  [3, "JavaScript"],
-  ["correct", 3],
-  [true, "Correct 🎉"],
-  [false, "Try again 😢"],
+const currencies = new Map([
+  ["USD", "United States dollar"],
+  ["EUR", "Euro"],
+  ["GBP", "Pound sterling"],
 ]);
 
-console.log(question.get("question"));
-
-for (const [key, value] of question) {
-  if (typeof key === "number") console.log(`Answer ${key}: ${value}`);
+// Using for...of loop
+for (const [key, value] of currencies) {
+  console.log(`${key}: ${value}`);
 }
+// Output:
+// USD: United States dollar
+// EUR: Euro
+// GBP: Pound sterling
 
-const answer = Number(prompt("Your answer"));
-console.log(question.get(question.get("correct") === answer));
+// Using forEach method
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+// Output:
+// USD: United States dollar
+// EUR: Euro
+// GBP: Pound sterling
 ```
-
----
 
 ### 5.12.7. Converting Between Maps and Objects
 
@@ -2859,7 +3789,7 @@ Data in JavaScript can come from various sources:
 3. **From external sources** – fetched from APIs or services
    _e.g._, recipe objects from a database or REST API
 
-> ![Data sources diagram](image-19.png)
+> ![Data sources diagram](images/image-19.png)
 
 ---
 
@@ -3085,11 +4015,494 @@ To quickly find string methods, search:
 
 The MDN page lists all related methods in the sidebar.
 
-# 6. 🐛 JavaScript Quirks
+# 6. Functions
+
+## 6.1. Default Parameters (ES6+)
+
+ES6 introduced a convenient way to set **default values for function parameters**. This means if no value (or `undefined`) is passed for a parameter, the function uses the default.
+
+**Example: `createBooking` Function**
+
+```js
+const bookings = [];
+
+const createBooking = function (
+  flightNum,
+  numPassengers = 1,
+  price = 199 * numPassengers
+) {
+  const booking = {
+    flightNum,
+    numPassengers,
+    price,
+  };
+  console.log(booking);
+  bookings.push(booking);
+};
+```
+
+- **Default Parameters**:
+
+  - `numPassengers = 1`: If `numPassengers` is not passed or is `undefined`, it defaults to `1`.
+  - `price = 199 * numPassengers`: This shows that default parameters can depend on earlier parameters.
+
+- **Example Call**:
+
+```js
+createBooking("LH123", undefined, 1000);
+```
+
+- Passing `undefined` for `numPassengers` ensures the default value `1` is used.
+- `price` is manually set to `1000`, so it **overrides** the default calculation.
+
+**Result:**
+
+```js
+{
+  flightNum: 'LH123',
+  numPassengers: 1,
+  price: 1000
+}
+```
+
+## 6.2. Value vs Reference
+
+JavaScript never passes variables by reference. Everything is passed by value — but when it comes to **objects** (including arrays and functions), that value just happens to be a reference (i.e., memory address) pointing to the actual object.
+
+That’s why JavaScript is often said to **not truly have pass-by-reference**—it passes **a reference to the object by value**.
+
+**Example: Understanding the Behavior**
+
+```js
+const flight = "LH234"; // primitive
+const jonas = {
+  name: "Jonas Schmedtmann",
+  passport: 24739479284, // object
+};
+```
+
+We then define a function to simulate checking in:
+
+```js
+const checkIn = function (flightNum, passenger) {
+  flightNum = "LH999"; // Reassigning primitive (no effect outside)
+  passenger.name = "Mr. " + passenger.name; // Modifying object (mutates original)
+
+  if (passenger.passport === 24739479284) {
+    alert("Checked in");
+  } else {
+    alert("Wrong passport!");
+  }
+};
+```
+
+- `flightNum = "LH999"` only affects the local copy inside `checkIn`. The original `flight` remains `"LH234"` because **primitives are passed by value**.
+- `passenger.name = "Mr. " + passenger.name` **does mutate** the `jonas` object because **objects are passed by reference** (the reference is passed by value, but still points to the original object).
+
+**Logs after First Call:**
+
+```js
+checkIn(flight, jonas);
+console.log(flight); // "LH234" (unchanged)
+console.log(jonas); // { name: "Mr. Jonas Schmedtmann", passport: 24739479284 }
+```
+
+**Changing the Passport:**
+
+```js
+const newPassport = function (person) {
+  person.passport = Math.trunc(Math.random() * 10000000000);
+};
+```
+
+- This directly mutates `jonas.passport`, meaning the next check-in will likely fail the passport check.
+
+```js
+newPassport(jonas);
+checkIn(flight, jonas); // shows "Wrong passport!"
+```
+
+**Summary:**
+
+| Type      | Passed As                 | Mutation Affects Original? |
+| --------- | ------------------------- | -------------------------- |
+| Primitive | By Value                  | ❌ No                      |
+| Object    | Reference passed by Value | ✅ Yes                     |
+
+## 6.3. First-Class and Higher-Order Functions
+
+### 6.3.1. First-Class Functions
+
+In JavaScript, functions are **first-class citizens**. This means:
+
+- Functions are **values** — just like strings, numbers, or objects.
+- Functions are actually a special kind of **object**.
+- Because of this, you can:
+
+  - Store them in variables or object properties
+  - Pass them as arguments to other functions
+  - Return them from functions
+  - Even call methods **on** them (e.g., `.bind()`, `.call()`, `.apply()`)
+
+**Example: Storing a Function in a Variable**
+
+```js
+const greet = function () {
+  console.log("Hello 👋");
+};
+
+greet(); // Hello 👋
+```
+
+**Example: Storing in an Object Property**
+
+```js
+const obj = {
+  speak: function () {
+    console.log("I'm a method!");
+  },
+};
+
+obj.speak(); // I'm a method!
+```
+
+---
+
+### 6.3.2. Higher-Order Functions
+
+A **higher-order function** is one that does **at least one** of the following:
+
+1. **Takes another function as an argument**
+2. **Returns a new function**
+
+**Example: Function Taking Another Function (Callback)**
+
+```js
+const transform = function (str, fn) {
+  console.log("Original string:", str);
+  console.log("Transformed string:", fn(str));
+  console.log("Transformed by:", fn.name);
+};
+
+const toUpper = (str) => str.toUpperCase();
+const toLower = (str) => str.toLowerCase();
+
+transform("JavaScript", toUpper);
+// Original string: JavaScript
+// Transformed string: JAVASCRIPT
+// Transformed by: toUpper
+
+transform("JavaScript", toLower);
+```
+
+**Example: Returning a Function**
+
+```js
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting}, ${name}!`);
+  };
+};
+
+const greetHello = greet("Hello");
+greetHello("Alice"); // Hello, Alice!
+
+// Or as one-liner
+greet("Hi")("Bob"); // Hi, Bob!
+```
+
+**Even Shorter with Arrow Functions**
+
+```js
+const greet = (greeting) => (name) => console.log(`${greeting}, ${name}!`);
+greet("Hey")("Charlie"); // Hey, Charlie!
+```
+
+---
+
+**Summary**
+
+| Concept                  | JavaScript Supports |
+| ------------------------ | ------------------- |
+| Store function in var    | ✅ Yes              |
+| Use function as argument | ✅ Yes              |
+| Return function          | ✅ Yes              |
+| Call methods on function | ✅ Yes              |
+
+> These features enable powerful patterns like **callbacks**, **closures**, **function factories**, and **currying**, all of which rely on JavaScript’s first-class and higher-order function capabilities.
+
+Here’s a complete, polished, and well-structured subchapter for your README on **`.call()`, `.apply()`, and `.bind()`** — with explanations, examples, and real-world usage:
+
+---
+
+## 6.4. The `call`, `apply`, and `bind` Methods
+
+In JavaScript, functions are **objects**, and like all objects, they come with methods. Among the most powerful and frequently used are:
+
+- `.call()`
+- `.apply()`
+- `.bind()`
+
+These methods allow you to **manually set the `this` keyword** inside a function — which is crucial when reusing methods across different objects.
+
+**The Problem**
+
+```js
+const lufthansa = {
+  airline: "Lufthansa",
+  iataCode: "LH",
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, "Jonas Schmedtmann");
+```
+
+Now we want to **reuse** the `book` method for another airline:
+
+```js
+const eurowings = {
+  airline: "Eurowings",
+  iataCode: "EW",
+  bookings: [],
+};
+
+const book = lufthansa.book;
+book(23, "Sarah Williams"); // ❌ Error: `this` is undefined
+```
+
+### 6.4.1. `call()` Method
+
+- Calls the function **with a custom `this` value**.
+- Arguments are passed **individually**.
+
+```js
+book.call(eurowings, 23, "Sarah Williams");
+console.log(eurowings);
+
+book.call(lufthansa, 239, "Mary Cooper");
+console.log(lufthansa);
+```
+
+### 6.4.2. `apply()` Method
+
+- Similar to `call()`, but it takes **an array** of arguments instead.
+- Less used today, since spread syntax makes `call()` more flexible.
+
+```js
+const swiss = {
+  airline: "Swiss Air Lines",
+  iataCode: "LX",
+  bookings: [],
+};
+
+const flightData = [583, "George Cooper"];
+book.apply(swiss, flightData); // ✅
+book.call(swiss, ...flightData); // ✅ preferred in modern JS
+```
+
+### 6.4.3. `bind()` Method
+
+- Returns a **new function** with `this` **permanently bound**.
+- Does **not** call the function immediately.
+
+```js
+const bookEW = book.bind(eurowings);
+bookEW(23, "Steven Williams");
+
+const bookEW23 = book.bind(eurowings, 23); // Pre-set flight number
+bookEW23("Jonas Schmedtmann");
+bookEW23("Martha Cooper");
+```
+
+**Using `bind()` with Event Listeners**
+
+```js
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+// Without bind: `this` would point to the button element
+document
+  .querySelector(".buy")
+  .addEventListener("click", lufthansa.buyPlane.bind(lufthansa));
+```
+
+**Partial Application with `bind()`**
+
+You can use `bind()` to **preset arguments**, a technique called **partial application**.
+
+```js
+const addTax = (rate, value) => value + value * rate;
+const addVAT = addTax.bind(null, 0.23); // `null` because we don’t care about `this`
+
+console.log(addVAT(100)); // 123
+console.log(addVAT(30)); // 36.9
+```
+
+Equivalent version using a **function returning a function**:
+
+```js
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100)); // 123
+console.log(addVAT2(30)); // 36.9
+```
+
+---
+
+### 6.4.4. Summary Table
+
+| Method    | Calls Immediately | Accepts Arguments | Returns New Function | Custom `this` |
+| --------- | ----------------- | ----------------- | -------------------- | ------------- |
+| `call()`  | ✅ Yes            | ✅ Individually   | ❌ No                | ✅ Yes        |
+| `apply()` | ✅ Yes            | ✅ As array       | ❌ No                | ✅ Yes        |
+| `bind()`  | ❌ No             | ✅ Individually   | ✅ Yes               | ✅ Yes        |
+
+## 6.5. Immediately Invoked Function Expressions (IIFE)
+
+An IIFE is a function that runs immediately after it's defined and creates a private scope. It's useful to avoid polluting the global namespace.
+
+```js
+(function () {
+  console.log("This will never run again");
+  const isPrivate = 23;
+})();
+```
+
+You can also use an arrow function:
+
+```js
+(() => console.log("This will ALSO never run again"))();
+```
+
+Variables declared with `const` or `let` inside an IIFE or a block `{}` are not accessible outside:
+
+```js
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+console.log(isPrivate); // ❌ Error
+console.log(notPrivate); // ✅ Works — avoid using var
+```
+
+IIFEs are less common today but still useful for quick one-time setups or isolating variables without modules.
+
+## 6.6. Closures
+
+> A closure is the closed-over **variable environment** of the execution context **in which a function was created**, even **after** that execution context is gone
+
+less formal
+
+> A closure giver a function access to all the variables **of its parent function**, even **after** that parent function has returned. The function keeps a **reference** to its outer scope, which _**preserves**_ the scope chain throughout time
+
+> A closure makes sure that a function doesn't loose connection to **variables that existed at the function's birth place**.
+
+> A closure is like a **backpack** that a function carries around wherever it goes. This backpack has all the **variables that were present in the environment where the function was created**.
+
+We do **NOT** have to manually create closures, this is a JavaScript feature that happens automatically. We can't even access closed-over variables explicitly. A closure is **NOT** a tangible JavaScript object.
+
+A Function has access to the variable environment (VE) of the execution context in which it was created
+Closure: VE attached to the function, exactly as it was at the time and place the function was created
+
+```js
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker(); // 1 passengers
+booker(); // 2 passengers
+booker(); // 3 passengers
+```
+
+Even though secureBooking() has already finished running, the inner function still has access to passengerCount. That’s the power of a closure.
+
+![alt text](images/image-20.png)
+
+---
+
+**More Closure Examples**
+
+Closures let functions remember variables from their original scope, even when those functions are used elsewhere or after the original scope has finished executing.
+
+```js
+// Example 1
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f(); // 46 — closure over `a`
+console.dir(f);
+
+h();
+f(); // 1554 — closure over `b`
+console.dir(f);
+```
+
+> `console.dir(f);` lets you inspect the closure by showing the variables (`[[Scopes]]`) that the function `f` has access to from its original scope.
+
+Each time `f` is reassigned, it forms a new closure over the variables in the scope where it was defined (`a` from `g`, `b` from `h`).
+
+---
+
+```js
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000;
+boardPassengers(180, 3);
+```
+
+The `setTimeout` callback executes **after** `boardPassengers` has finished, but it still has access to `n` and `perGroup` — that's a closure in action. The outer `perGroup = 1000` is ignored because the closure retains access to the inner one (`60`).
+
+# 7. 🐛 JavaScript Quirks
 
 This section is personal — it includes things I found strange or surprising while working with JavaScript.
 
-## 6.1. Console Logs Capture References, Not Values
+## 7.1. Console Logs Capture References, Not Values
 
 In modern browsers (e.g. Chrome DevTools), `console.log()` captures a **reference** to the object at the time of logging — _not_ the exact value snapshot.
 
