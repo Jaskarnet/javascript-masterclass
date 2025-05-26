@@ -73,6 +73,11 @@
   - [2.1. 🧩 Problem Solving](#21--problem-solving)
   - [2.2. 🛠️ Debugging](#22-️-debugging)
   - [2.3. 🤖 Using AI for coding](#23--using-ai-for-coding)
+  - [2.4. Project Planning](#24-project-planning)
+    - [2.4.1. User Stories](#241-user-stories)
+    - [2.4.2. Features](#242-features)
+    - [2.4.3. Flowchart](#243-flowchart)
+    - [2.4.4. Architecture](#244-architecture)
 - [3. JavaScript in the Browser: DOM and Events](#3-javascript-in-the-browser-dom-and-events)
   - [3.1. 📄 DOM](#31--dom)
     - [3.1.1. Selecting Elements](#311-selecting-elements)
@@ -80,6 +85,7 @@
   - [3.2. 🖱️ Events](#32-️-events)
     - [3.2.1. Handling Events](#321-handling-events)
     - [3.2.2. Keyboard Events](#322-keyboard-events)
+    - [3.2.3. Local Storage](#323-local-storage)
 - [4. How JavaScript Works Behind The Scenes](#4-how-javascript-works-behind-the-scenes)
   - [4.1. 💡 Definition again](#41--definition-again)
     - [4.1.1. High-level](#411-high-level)
@@ -119,7 +125,8 @@
     - [4.5.2. Simple function call](#452-simple-function-call)
     - [4.5.3. Arrow Function](#453-arrow-function)
     - [4.5.4. Event Listener](#454-event-listener)
-    - [4.5.5. Examples](#455-examples)
+    - [4.5.5. Passing Methods as Callbacks](#455-passing-methods-as-callbacks)
+    - [4.5.6. Examples](#456-examples)
   - [4.6. 🧼 Memory Management: Primitives vs Objects](#46--memory-management-primitives-vs-objects)
     - [4.6.1. Reference](#461-reference)
       - [4.6.1.1. Shallow copy](#4611-shallow-copy)
@@ -224,8 +231,39 @@
     - [6.4.4. Summary Table](#644-summary-table)
   - [6.5. Immediately Invoked Function Expressions (IIFE)](#65-immediately-invoked-function-expressions-iife)
   - [6.6. Closures](#66-closures)
-- [7. 🐛 JavaScript Quirks](#7--javascript-quirks)
-  - [7.1. Console Logs Capture References, Not Values](#71-console-logs-capture-references-not-values)
+- [7. Asynchronous JavaScript, AJAX and APIs](#7-asynchronous-javascript-ajax-and-apis)
+  - [7.1. Synchronous vs Asynchronous](#71-synchronous-vs-asynchronous)
+  - [7.2. AJAX – Asynchronous JavaScript and XML](#72-ajax--asynchronous-javascript-and-xml)
+  - [7.3. Callback Hell](#73-callback-hell)
+    - [7.3.1. What is Callback Hell?](#731-what-is-callback-hell)
+    - [7.3.2. Problems:](#732-problems)
+    - [7.3.3. Example:](#733-example)
+  - [7.4. Promises](#74-promises)
+    - [7.4.1. What is a Promise?](#741-what-is-a-promise)
+    - [7.4.2. Lifecycle of a Promise:](#742-lifecycle-of-a-promise)
+  - [7.5. Solving Callback Hell Using Promises](#75-solving-callback-hell-using-promises)
+    - [7.5.1. Callback Hell with `XMLHttpRequest`](#751-callback-hell-with-xmlhttprequest)
+    - [7.5.2. Promise-Based Solution](#752-promise-based-solution)
+  - [7.6. Creating and Using Your Own Promises](#76-creating-and-using-your-own-promises)
+    - [7.6.1. Building a Simple Promise](#761-building-a-simple-promise)
+    - [7.6.2. Promisifying `setTimeout`](#762-promisifying-settimeout)
+    - [7.6.3. Resolved and Rejected Promises](#763-resolved-and-rejected-promises)
+  - [7.7. Consuming Promises with `async`/`await` (ES2017+)](#77-consuming-promises-with-asyncawait-es2017)
+    - [7.7.1. What is `async`/`await`?](#771-what-is-asyncawait)
+    - [7.7.2. How it works](#772-how-it-works)
+    - [7.7.3. Side-by-side Comparison](#773-side-by-side-comparison)
+      - [7.7.3.1. Using Promises with `.then()`](#7731-using-promises-with-then)
+      - [7.7.3.2. The Same Logic Using `async`/`await`](#7732-the-same-logic-using-asyncawait)
+    - [7.7.5. Handling Errors: Comparing `.then()` vs `async/await`](#775-handling-errors-comparing-then-vs-asyncawait)
+      - [Using `.then()`, `.catch()`, and `.finally()`](#using-then-catch-and-finally)
+      - [Using `async/await` with `try...catch` (and final code after)](#using-asyncawait-with-trycatch-and-final-code-after)
+    - [7.7.6 Running Multiple Promises in Parallel with `Promise.all`](#776-running-multiple-promises-in-parallel-with-promiseall)
+      - [Example using `Promise.all` with async/await:](#example-using-promiseall-with-asyncawait)
+    - [7.7.7 `Promise.race`](#777-promiserace)
+    - [7.7.8 `Promise.allSettled`](#778-promiseallsettled)
+    - [7.7.9 `Promise.any`](#779-promiseany)
+- [8. 🐛 JavaScript Quirks](#8--javascript-quirks)
+  - [8.1. Console Logs Capture References, Not Values](#81-console-logs-capture-references-not-values)
 
 # 1. Fundamentals
 
@@ -1469,6 +1507,70 @@ We can use AI for:
 
 > ⚠️ Don’t just use AI blindly — it can make you a **worse programmer** if you rely on it without understanding.
 
+## 2.4. Project Planning
+
+**4 steps of planning**:
+
+1. **User Stories** - description of the application's functionality from the user's **perspective**. All user stories put together describe the entire application.
+2. **Features**
+3. **Flowchart** - _WHAT_ we will build
+4. **Architecture** - HOW we will build
+5. Development Step - implementation of our plan using code (not part of planning)
+
+### 2.4.1. User Stories
+
+**Common format**: As a **[type of user]**, I want **[an action]** so that **[a benefit]**
+
+- **[type of user]** - Who? Example: user, admin
+- **[an action]** - What?
+- **[a benefit]** - Why?
+
+Example stories:
+
+1. As a **user**, I want to **log my running workouts with location, distance, time, pace and steps/minute**, so I can **keep a log of all my running**.
+
+2. As a **user**, I want to **log my cycling workouts with location, distance, time, speed and elevation gain**, so I can **keep a log of all my cycling**.
+
+3. As a **user**, I want to **see all my workouts at a glance**, so I can **easily track my progress over time**.
+
+4. As a **user**, I want to also **see my workouts on a map**, so i can **easily check where I work out most**.
+
+5. As a **user**, I want to **see all my workouts when i leave the app and come back later**, so that I can **keep using the app over time**.
+
+### 2.4.2. Features
+
+Example features:
+
+1. As a **user**, I want to **log my running workouts with location, distance, time, pace and steps/minute**, so I can **keep a log of all my running**.
+
+   - Map where user clicks to add new workout
+   - Geolocation to display map at current location
+   - Form to input distance, time, pace, steps/minute
+
+2. As a **user**, I want to **log my cycling workouts with location, distance, time, speed and elevation gain**, so I can **keep a log of all my cycling**.
+
+   - Form to input distance, time, speed, elevation gain
+
+3. As a **user**, I want to **see all my workouts at a glance**, so I can **easily track my progress over time**.
+
+   - Display all workouts in a list
+
+4. As a **user**, I want to also **see my workouts on a map**, so i can **easily check where I work out most**.
+
+   - Display all workouts on the map
+
+5. As a **user**, I want to **see all my workouts when i leave the app and come back later**, so that I can **keep using the app over time**.
+   - Store workout data in the browser using local storage API
+   - On page load, read the saved data from local storage and display
+
+### 2.4.3. Flowchart
+
+It is good to start a flowchart with event, so in any browser app it is a good idea to start with "Page loads" event.
+
+![alt text](images/image-26.png)
+
+### 2.4.4. Architecture
+
 # 3. JavaScript in the Browser: DOM and Events
 
 ## 3.1. 📄 DOM
@@ -1561,7 +1663,9 @@ document.addEventListener("keydown", function (e) {
 
 This adds a user-friendly way to close the modal with the Escape key.
 
----
+### 3.2.3. Local Storage
+
+Objects retrieved from local storage lose their prototype chain, so they no longer inherit their original methods.
 
 # 4. How JavaScript Works Behind The Scenes
 
@@ -2156,7 +2260,47 @@ button.addEventListener("click", () => {
 
 > `this` = inherited from the **outer scope**, _not_ the button<br>Often results in `this` being `undefined` or `window` (depending on context)
 
-### 4.5.5. Examples
+Absolutely — here’s a clean, general-purpose subchapter you can plug into your `"this"` chapter. It captures the broader concept behind what you encountered:
+
+---
+
+### 4.5.5. Passing Methods as Callbacks
+
+One of the most common pitfalls in JavaScript is **losing the `this` context** when a method is passed as a callback.
+
+**What's Happening?**
+
+When you pass a method (e.g. `this._loadMap`) **without calling it**, it's treated as a **regular function**, and **`this` no longer refers to the original object**.
+
+```js
+// ❌ `this` will be undefined inside _loadMap
+navigator.geolocation.getCurrentPosition(this._loadMap);
+```
+
+This happens because:
+
+- The method is not called with an object (e.g. `app._loadMap()`).
+- It's executed by the API (like `getCurrentPosition`) as a **standalone function**.
+
+This Can Break:
+
+- Class methods (`this.someMethod`)
+- Object methods (`obj.method`)
+- Event handlers, timer callbacks, promise handlers, etc.
+
+**Fix the Context**
+
+Use one of the following to preserve `this`:
+
+```js
+// Method 1: bind the method to the object
+navigator.geolocation.getCurrentPosition(this._loadMap.bind(this));
+
+// Method 2: use an arrow function wrapper
+navigator.geolocation.getCurrentPosition(() => this._loadMap());
+```
+
+### 4.5.6. Examples
 
 **Example of `this` dynamic Binding Behavior in Nested Functions**
 
@@ -4498,11 +4642,438 @@ boardPassengers(180, 3);
 
 The `setTimeout` callback executes **after** `boardPassengers` has finished, but it still has access to `n` and `perGroup` — that's a closure in action. The outer `perGroup = 1000` is ignored because the closure retains access to the inner one (`60`).
 
-# 7. 🐛 JavaScript Quirks
+# 7. Asynchronous JavaScript, AJAX and APIs
+
+## 7.1. Synchronous vs Asynchronous
+
+**Synchronous**:
+
+- Most code is **synchronous**
+- Synchronous code is **executed line by line**
+- Each line of code **waits** for the previous line to finish
+- <span style='color:red'> Long-running operations **block** code execution</span>
+
+**Asynchronous**:
+
+- Asynchronous code is executed **after a task that runs in the _background_ finishes**
+- Asynchronous code is <span style='color:green'>**non-blocking**</span>
+- Execution doesn't wait for an asynchronous task to finish its work
+
+## 7.2. AJAX – Asynchronous JavaScript and XML
+
+AJAX allows us to communicate with remote web servers **asynchronously**, enabling dynamic data fetching.
+
+- The “X” in AJAX originally stood for **XML**, but nowadays most APIs use **JSON** instead.
+- Despite this, the term **AJAX** is still widely used.
+
+**Example:**
+
+```js
+fetch("https://restcountries.com/v2/name/portugal")
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+## 7.3. Callback Hell
+
+When using many nested callbacks, asynchronous JavaScript can become messy and unreadable.
+
+### 7.3.1. What is Callback Hell?
+
+> A situation where callbacks are nested within callbacks, forming a “pyramid of doom.”
+
+### 7.3.2. Problems:
+
+- Difficult to **read** and **maintain**
+- Hard to **debug**
+- Logic becomes **spaghetti-like**
+
+### 7.3.3. Example:
+
+```js
+doSomething((result) => {
+  doSomethingElse(result, (newResult) => {
+    doThirdThing(newResult, (finalResult) => {
+      console.log("Got the final result: " + finalResult);
+    });
+  });
+});
+```
+
+## 7.4. Promises
+
+### 7.4.1. What is a Promise?
+
+> A **Promise** is an object that represents the **eventual result** of an asynchronous operation.
+
+Instead of nesting callbacks, Promises allow **chaining** with `.then()` and centralized error handling with `.catch()`.
+
+### 7.4.2. Lifecycle of a Promise:
+
+- **Pending**
+- **Fulfilled**
+- **Rejected**
+
+![The promise lifecycle](images/image-27.png)
+
+---
+
+## 7.5. Solving Callback Hell Using Promises
+
+### 7.5.1. Callback Hell with `XMLHttpRequest`
+
+```js
+const getCountryAndNeighbour = function (country) {
+  const request = new XMLHttpRequest();
+  request.open("GET", `https://restcountries.com/v2/name/${country}`);
+  request.send();
+
+  request.addEventListener("load", function () {
+    const [data] = JSON.parse(this.responseText);
+    renderCountry(data);
+
+    const neighbour = data.borders?.[0];
+    if (!neighbour) return;
+
+    const request2 = new XMLHttpRequest();
+    request2.open("GET", `https://restcountries.com/v2/alpha/${neighbour}`);
+    request2.send();
+
+    request2.addEventListener("load", function () {
+      const data2 = JSON.parse(this.responseText);
+      renderCountry(data2, "neighbour");
+    });
+  });
+};
+```
+
+### 7.5.2. Promise-Based Solution
+
+```js
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((response) => response.json())
+    .then((data) => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+      if (!neighbour) throw new Error("No neighbour found");
+      return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+    })
+    .then((response) => response.json())
+    .then((data) => renderCountry(data, "neighbour"))
+    .catch((err) => console.error(`${err.message} 💥`));
+};
+```
+
+---
+
+## 7.6. Creating and Using Your Own Promises
+
+### 7.6.1. Building a Simple Promise
+
+```js
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log("Lottery draw is happening 🔮");
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve("You WIN 💰");
+    } else {
+      reject(new Error("You lost your money 💩"));
+    }
+  }, 2000);
+});
+
+lotteryPromise
+  .then((res) => console.log(res))
+  .catch((err) => console.error(err));
+```
+
+### 7.6.2. Promisifying `setTimeout`
+
+```js
+const wait = function (seconds) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+};
+
+wait(1)
+  .then(() => {
+    console.log("1 second passed");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("2 seconds passed");
+    return wait(1);
+  })
+  .then(() => {
+    console.log("3 seconds passed");
+    return wait(1);
+  })
+  .then(() => console.log("4 seconds passed"));
+```
+
+This is far cleaner than the callback version:
+
+```js
+setTimeout(() => {
+  console.log("1 second passed");
+  setTimeout(() => {
+    console.log("2 seconds passed");
+    setTimeout(() => {
+      console.log("3 seconds passed");
+      setTimeout(() => {
+        console.log("4 seconds passed");
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
+```
+
+### 7.6.3. Resolved and Rejected Promises
+
+```js
+Promise.resolve("abc").then((x) => console.log(x));
+Promise.reject(new Error("Problem!")).catch((x) => console.error(x));
+```
+
+## 7.7. Consuming Promises with `async`/`await` (ES2017+)
+
+### 7.7.1. What is `async`/`await`?
+
+`async`/`await` is a feature introduced in ES2017 that simplifies working with asynchronous code written using Promises. It allows you to write asynchronous logic in a way that reads and behaves more like synchronous code, making it easier to follow.
+
+Although it looks different, it is not a replacement for Promises — it's just a different way of consuming them. Under the hood, `async`/`await` is syntactic sugar over the `.then()` method.
+
+### 7.7.2. How it works
+
+- A function declared with the `async` keyword automatically returns a Promise.
+- Inside an `async` function, you can use `await` to pause execution until a Promise resolves (or rejects).
+- You must use `await` inside an `async` function — it cannot be used in top-level code.
+
+### 7.7.3. Side-by-side Comparison
+
+#### 7.7.3.1. Using Promises with `.then()`
+
+```js
+const whereAmI = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((res) => res.json())
+    .then((data) => console.log(data[0]))
+    .catch((err) => console.error(err));
+};
+```
+
+#### 7.7.3.2. The Same Logic Using `async`/`await`
+
+```js
+const whereAmI = async function (country) {
+  try {
+    const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+    const data = await res.json();
+    console.log(data[0]);
+  } catch (err) {
+    console.error(err);
+  }
+};
+```
+
+**Advantages of `async`/`await`**
+
+- **Improved readability**: Especially with multiple asynchronous operations in a row.
+- **Linear control flow**: Easier to follow the logic without needing nested `.then()` chains.
+- **Easier error handling**: With `try...catch`, you can handle errors in a more familiar way.
+
+### 7.7.5. Handling Errors: Comparing `.then()` vs `async/await`
+
+When consuming promises, there are two common ways to handle success, errors, and final actions:
+
+#### Using `.then()`, `.catch()`, and `.finally()`
+
+```js
+whereAmI()
+  .then((city) => console.log(`2: ${city}`))
+  .catch((err) => console.error(`2: ${err.message} 💥`))
+  .finally(() => console.log("3: Finished getting location"));
+```
+
+- Uses chained methods for success, error, and cleanup.
+- The `.finally()` method runs regardless of the promise outcome.
+- Can sometimes lead to mixing styles or less readable chains when multiple async steps are involved.
+
+#### Using `async/await` with `try...catch` (and final code after)
+
+```js
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message} 💥`);
+  }
+  console.log("3: Finished getting location");
+})();
+```
+
+- `try...catch` provides a familiar and straightforward way to handle errors.
+- The code after `catch` runs like a `finally` block, ensuring cleanup or final steps execute.
+- Keeps the asynchronous flow linear and easier to read.
+- Allows use of `await` at the top-level inside the async IIFE.
+
+---
+
+**Summary:**
+Both approaches are valid, but when working with multiple asynchronous operations, `async/await` combined with `try...catch` helps write cleaner, more maintainable code without mixing callback styles. Use `.finally()` in `.then()` chains when appropriate, but try to stay consistent with your style.
+
+### 7.7.6 Running Multiple Promises in Parallel with `Promise.all`
+
+When you want to run multiple asynchronous operations _at the same time_ and wait for all of them to complete before continuing, use `Promise.all`.
+
+`Promise.all` takes an array of promises and returns a new promise that:
+
+- Resolves when _all_ the input promises have resolved, with an array of their results.
+- Rejects immediately if _any_ of the input promises reject, with the first rejection error.
+
+#### Example using `Promise.all` with async/await:
+
+```js
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    // Run 3 fetch requests in parallel
+    const data = await Promise.all([
+      fetch(`https://restcountries.com/v2/name/${c1}`),
+      fetch(`https://restcountries.com/v2/name/${c2}`),
+      fetch(`https://restcountries.com/v2/name/${c3}`),
+    ]);
+
+    // Extract JSON from each response in parallel
+    const results = await Promise.all(data.map((res) => res.json()));
+
+    console.log(results); // Array of country data objects
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+get3Countries("portugal", "canada", "tanzania");
+```
+
+**Why use `Promise.all`?**
+
+- Improves performance by running async tasks _in parallel_ rather than sequentially.
+- Makes your code cleaner when multiple independent async operations must all complete before proceeding.
+- Useful in scenarios like fetching data from multiple APIs simultaneously.
+
+---
+
+**Summary:**
+`async/await` simplifies promise consumption by making asynchronous code look synchronous, improving readability and error handling. For running multiple promises in parallel, `Promise.all` is a powerful tool that helps optimize performance and manage multiple async operations efficiently.
+
+### 7.7.7 `Promise.race`
+
+- Returns a promise that settles as soon as **the first** promise in the iterable settles (either resolves or rejects).
+- Useful for implementing timeouts or getting the fastest result among multiple async operations.
+
+**Example: Using `Promise.race` with a reusable timeout function**
+
+```js
+// Function that returns a promise rejecting after a given time (ms)
+const timeout = function (ms) {
+  return new Promise((_, reject) =>
+    setTimeout(() => reject(new Error("Request timed out")), ms)
+  );
+};
+
+const fetchData = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve("Data loaded");
+  }, 3000); // Simulate async operation taking 3 seconds
+});
+
+const timeoutDuration = 2000; // 2 seconds timeout
+
+Promise.race([fetchData, timeout(timeoutDuration)])
+  .then((result) => console.log(result))
+  .catch((err) => console.error(err.message));
+```
+
+**Explanation:**
+
+- `Promise.race` settles with the result of whichever promise settles first.
+- If `fetchData` finishes within 2 seconds, it resolves successfully.
+- If it takes longer, the `timeout` promise rejects and triggers the error handler.
+- This lets you add time limits to asynchronous operations.
+
+---
+
+### 7.7.8 `Promise.allSettled`
+
+- Returns a promise that **always resolves** after **all** promises have settled (either resolved or rejected).
+- The resolved value is an array of objects describing the outcome of each promise (`status` and either `value` or `reason`).
+- Useful when you want to know the result of all promises regardless of success or failure, e.g., batch operations.
+
+**Example:**
+
+```js
+const promises = [
+  Promise.resolve("Success 1"),
+  Promise.reject(new Error("Failure 1")),
+  Promise.resolve("Success 2"),
+];
+
+Promise.allSettled(promises).then((results) => {
+  results.forEach((result, index) => {
+    if (result.status === "fulfilled") {
+      console.log(`Promise ${index + 1} resolved with: ${result.value}`);
+    } else {
+      console.log(`Promise ${index + 1} rejected with: ${result.reason}`);
+    }
+  });
+});
+```
+
+**Explanation:**
+
+- All promises run concurrently.
+- The final promise resolves after all finish, giving you their results.
+- You get info on both successes and failures without short-circuiting on the first rejection (unlike `Promise.all`).
+
+---
+
+### 7.7.9 `Promise.any`
+
+- Returns a promise that resolves as soon as **any one** of the input promises resolves.
+- If all promises reject, it rejects with an `AggregateError`.
+- Useful when you want the first successful result among many, ignoring failures until then.
+
+**Example:**
+
+```js
+const promises = [
+  Promise.reject(new Error("Failure 1")),
+  Promise.reject(new Error("Failure 2")),
+  Promise.resolve("Success 1"),
+  Promise.resolve("Success 2"),
+];
+
+Promise.any(promises)
+  .then((result) => {
+    console.log("First fulfilled promise:", result);
+  })
+  .catch((err) => {
+    console.error("All promises rejected:", err.errors);
+  });
+```
+
+**Explanation:**
+
+- Waits for the first promise that resolves successfully.
+- If all reject, the `catch` block receives an `AggregateError` containing all rejection reasons.
+- Perfect for scenarios like querying multiple servers and using the fastest successful response.
+
+# 8. 🐛 JavaScript Quirks
 
 This section is personal — it includes things I found strange or surprising while working with JavaScript.
 
-## 7.1. Console Logs Capture References, Not Values
+## 8.1. Console Logs Capture References, Not Values
 
 In modern browsers (e.g. Chrome DevTools), `console.log()` captures a **reference** to the object at the time of logging — _not_ the exact value snapshot.
 
