@@ -2260,10 +2260,6 @@ button.addEventListener("click", () => {
 
 > `this` = inherited from the **outer scope**, _not_ the button<br>Often results in `this` being `undefined` or `window` (depending on context)
 
-Absolutely — here’s a clean, general-purpose subchapter you can plug into your `"this"` chapter. It captures the broader concept behind what you encountered:
-
----
-
 ### 4.5.5. Passing Methods as Callbacks
 
 One of the most common pitfalls in JavaScript is **losing the `this` context** when a method is passed as a callback.
