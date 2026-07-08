@@ -2,7 +2,7 @@
 
 This repository contains my personal notes as I follow The Complete JavaScript Course on Udemy. It includes projects I've worked on during the course, and serves as a living document to reinforce what I'm learning and as a future reference.
 
-## 📚 Table of Contents <!-- omit from toc -->
+## Table of Contents <!-- omit from toc -->
 
 - [1. Fundamentals](#1-fundamentals)
   - [1.1. What is JavaScript?](#11--what-is-javascript)
@@ -288,7 +288,7 @@ For older browsers, tools like **Babel** can transpile modern code to ES5.
 
 The language continues to evolve, with new features proposed through a **4-stage process** before being officially included in the standard.
 
-## 1.2. 🧾 Variable Naming Conventionss
+## 1.2. Variable Naming Conventionss
 
 In JavaScript, the standard for naming variables is **camelCase**, starting with a lowercase letter.
 
@@ -339,7 +339,7 @@ let x = 42; // ❌ Vague
 let userScore = 42; // ✅ Descriptive
 ```
 
-## 1.3. 🧮 Data Types
+## 1.3. Data Types
 
 **JavaScript uses dynamic typing.**
 
@@ -414,7 +414,7 @@ Used to represent integers **larger than the `Number` type can safely handle**.
 const huge = 1234567890123456789012345678901234567890n;
 ```
 
-## 1.4. 📦 Variable Declarations
+## 1.4. Variable Declarations
 
 ### 1.4.1. `let`
 
@@ -461,7 +461,7 @@ console.log(lastName); // ⚠️ works, but...
 
 This implicitly creates a global variable (adds a property to the global object), which can easily lead to bugs and hard-to-maintain code. **Avoid doing this**.
 
-## 1.5. ➗ Operators
+## 1.5. Operators
 
 Exponentiation (`**`)
 Raises the first number to the power of the second:
@@ -472,7 +472,7 @@ console.log(2 ** 3); // 8
 
 [Operator precedence table (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence#table)
 
-## 1.6. 📝 Template Literals
+## 1.6. Template Literals
 
 Template literals (introduced in ES6) are an easier, cleaner way to build strings in JavaScript.  
 They allow embedding expressions directly inside the string using backticks <code>\` \`</code> and the `${}` syntax.
@@ -500,7 +500,7 @@ lines without using \\n`;
 
 Template literals make the code more readable and easier to write, especially when mixing strings with variables or expressions even across multiple lines.
 
-## 1.7. 🔄 Type Conversion and Coercion
+## 1.7. Type Conversion and Coercion
 
 ### 1.7.1. Type Conversion (Manual)
 
@@ -540,7 +540,7 @@ console.log(n); // '15' → 10-4-3-2=1 → 1+'5' = '15'
 
 Understanding when JavaScript converts types automatically helps you avoid unexpected bugs.
 
-## 1.8. ⚖️ Truthy and Falsy Values
+## 1.8. Truthy and Falsy Values
 
 In JavaScript, **falsy values** are values that automatically convert to `false` when evaluated in a boolean context.
 
@@ -561,7 +561,7 @@ console.log(Boolean("Jonas")); // true
 console.log(Boolean({})); // true
 ```
 
-## 1.9. 🟰 Equality Operators
+## 1.9. Equality Operators
 
 In JavaScript, there are two main types of equality operators:
 
@@ -595,7 +595,7 @@ The strict inequality operator (`!==`) checks if two values are not equal in bot
 
 Always prefer strict equality (`===`) and strict inequality (`!==`) to avoid unexpected type coercion.
 
-## 1.10. 🧷 Strict Mode
+## 1.10. Strict Mode
 
 Strict mode helps you write cleaner, more secure JavaScript.  
 Place `'use strict';` at the beginning of your script (or function) to enable it.
@@ -614,7 +614,7 @@ if (hasDriversLicense) console.log("I can drive :D");
 const interface = "Audio"; // ❌ Uncaught SyntaxError: Unexpected strict mode reserved word
 ```
 
-## 1.11. 📐 Function Declarations vs Expressions
+## 1.11. Function Declarations vs Expressions
 
 ### Function Declaration <!-- omit from toc -->
 
@@ -654,7 +654,7 @@ const calcAge2 = function (birthYear) {
 
 Both are valid in JavaScript. The choice often depends on personal preference and use case.
 
-## 1.12. 🏹 Arrow Functions
+## 1.12. Arrow Functions
 
 Arrow functions were introduced in **ES6** as a more concise way to write function expressions — especially useful for **simple one-liners**.
 
@@ -682,7 +682,7 @@ console.log(greetPerson("Alice", 30)); // Hello, Alice! You are 30 years old.
 - For multiple lines of code, you need curly braces and an explicit `return` statement.
 - Arrow functions don't have their own `this` keyword (important for more advanced JavaScript).
 
-## 1.13. 🔢 Arrays
+## 1.13. Arrays
 
 Arrays allow us to store multiple related values in a single variable, rather than creating separate variables for each value.
 
@@ -1311,7 +1311,7 @@ console.log(replaced); // [10, 99, 30]
 console.log(nums); // [10, 20, 30] original unchanged
 ```
 
-## 1.14. 🧱 Objects
+## 1.14. Objects
 
 While arrays are great for ordered data, objects let us define key-value pairs.
 
@@ -1430,7 +1430,7 @@ console.log(jonas.getSummary()); // "Jonas Schmedtmann is a 46-year old teacher.
 
 # 2. Developer Skills
 
-## 2.1. 🧩 Problem Solving
+## 2.1. Problem Solving
 
 1. **Understand the Problem Thoroughly**  
    Ask the right questions to get a clear and complete picture of what you're solving.
@@ -1444,7 +1444,7 @@ console.log(jonas.getSummary()); // "Jonas Schmedtmann is a 46-year old teacher.
 4. **Plan Before You Code**  
    For larger problems, write pseudo-code first to map out your logic clearly before jumping into real code.
 
-## 2.2. 🛠️ Debugging
+## 2.2. Debugging
 
 1. **Identify the Bug**
 
@@ -1470,7 +1470,7 @@ console.log(jonas.getSummary()); // "Jonas Schmedtmann is a 46-year old teacher.
    - Search for similar code where the same issue might exist
    - Write tests using testing tools to catch regressions early
 
-## 2.3. 🤖 Using AI for coding
+## 2.3. Using AI for coding
 
 **AIs:** ChatGPT, GitHub Copilot, Cursor
 
@@ -1573,7 +1573,7 @@ It is good to start a flowchart with event, so in any browser app it is a good i
 
 # 3. JavaScript in the Browser: DOM and Events
 
-## 3.1. 📄 DOM
+## 3.1. DOM
 
 **Document Object Model (DOM)**  
 A structured representation of HTML documents.  
@@ -1618,7 +1618,7 @@ This is useful for creating immediate feedback in the UI based on game state.
 
 ---
 
-## 3.2. 🖱️ Events
+## 3.2. Events
 
 ### 3.2.1. Handling Events
 
@@ -1669,7 +1669,7 @@ Objects retrieved from local storage lose their prototype chain, so they no long
 
 # 4. How JavaScript Works Behind The Scenes
 
-## 4.1. 💡 Definition again
+## 4.1. Definition again
 
 Getting back to the definition, here's a more complicated one:
 
@@ -2053,7 +2053,7 @@ Sounds like it would block the single thread. However, we want non-blocking beha
 
 By using an **event loop**: it takes long-running tasks, executes them in the background, and puts them back in the main thread once they are finished.
 
-## 4.2. ⚙️ Engine and Runtime
+## 4.2. Engine and Runtime
 
 ### 4.2.1. Engine
 
@@ -2102,7 +2102,7 @@ This is how JavaScript’s non-blocking concurrency model is implemented.
 **JavaScript in Node.js**:  
 ![alt text](images/image-8.png)
 
-## 4.3. 🔁 Execution Contexts and the Call Stack
+## 4.3. Execution Contexts and the Call Stack
 
 So our code just finished compiling and is ready to be executed.
 
@@ -2165,7 +2165,7 @@ Scope chain is created in order in which functions are **written in the code**. 
 **summary**
 ![alt text](images/image-12.png)
 
-## 4.4. 🪄 Variable Environment: Hoisting and the TDZ
+## 4.4. Variable Environment: Hoisting and the TDZ
 
 **Hoisting** makes some types of variables accessible/usable in the code before they are actually declared. "Variables lifted to the top of their scope".
 
@@ -2177,7 +2177,7 @@ Functions are simply variables so they behave the exact same way as variables in
 
 ![alt text](images/image-14.png)
 
-## 4.5. 🔍 `this` keyword
+## 4.5. `this` keyword
 
 - `this` is a **special variable** that is created for every execution context (i.e., every function).
 - It **refers to the 'owner'** of the function in which the `this` keyword is used.
@@ -2409,7 +2409,7 @@ addAllArrowFixed(5, 10); // Logs: Sum: 15
 
 - ✅ Cleaner and more flexible
 
-## 4.6. 🧼 Memory Management: Primitives vs Objects
+## 4.6. Memory Management: Primitives vs Objects
 
 Memory management in the context of JavaScript is how the JavaScript Engine allocates space in memory for creating variables and later frees up that memory space if variables are no longer needed so that our applications runs smoothly and efficiently without running out of memory.
 
@@ -2589,7 +2589,7 @@ This is different from a **shallow copy**, where nested objects or arrays would 
 
 # 5. Data Structures, Modern Operators, and Strings
 
-## 5.1. 🧬 Destructuring Arrays
+## 5.1. Destructuring Arrays
 
 Destructuring allows you to unpack values from arrays or properties from objects into distinct variables. It's a concise way to assign variables directly from arrays.
 
@@ -2718,7 +2718,7 @@ If index `10` is out of bounds in `starterMenu`, the default value `"No starter"
 
 Here’s a well-formatted, descriptive version of your section **“5.1. 🧬 Destructuring Objects”** with improved structure, clarity, comments, and consistent formatting:
 
-## 5.2. 🧬 Destructuring Objects
+## 5.2. Destructuring Objects
 
 Object destructuring allows you to extract properties from objects and assign them to variables using a concise syntax.
 
@@ -2862,7 +2862,7 @@ restaurant.orderDelivery({
 // Order received! Bruschetta and Pizza will be delivered to Piazza Roma, 10 at 20:00
 ```
 
-## 5.3. 📤 5.3. Spread Operator
+## 5.3. Spread Operator
 
 The spread operator is similar to destructuring, but it doesn’t create new variables.
 It’s used in places where values are expected to be comma-separated (e.g., array literals, function calls).
@@ -2974,7 +2974,7 @@ console.log(restaurant.name);
 // Output: "Classico Italiano" (original remains unchanged)
 ```
 
-## 5.4. 🧺 Rest Pattern and Parameters
+## 5.4. Rest Pattern and Parameters
 
 The **rest pattern** is the **opposite of the spread operator**. While the spread operator is used to **unpack** elements from an array or object, the rest pattern is used to **pack** multiple elements into a single array or object.
 It is used on the **left-hand side** of an assignment operator (`=`).
@@ -3047,7 +3047,7 @@ const x = [23, 5, 7];
 add(...x); // Output: 35
 ```
 
-## 5.5. ⚡ Short Circuiting
+## 5.5. Short Circuiting
 
 Logical operators in JavaScript are more flexible than in strict Boolean logic. They:
 
@@ -3157,7 +3157,7 @@ console.log(userScore); // Output: 0 → `0` is not nullish, so it is used
 - The `??` operator will only **short-circuit** if the value on the **left side** is **null** or **undefined**.
 - If the value is **truthy** or **non-nullish** (like `0`, `false`, or `''`), it won't short-circuit and will return the left value.
 
-## 5.6. ⚡ Logical Assignment Operators _(ES2021+)_
+## 5.6. Logical Assignment Operators _(ES2021+)_
 
 Logical assignment operators combine the functionality of logical operators (`||`, `&&`, `??`) with assignment. These operators provide a more concise way of performing logical operations when assigning values to variables.
 
@@ -3298,7 +3298,7 @@ console.log(rest2);
 - **`rest1.numGuests ??= 10`**: Since `numGuests` is `null` (a nullish value), the nullish coalescing assignment operator assigns `10` to `numGuests`.
 - **`rest2.numGuests ??= 10`**: Since `numGuests` is `0` (not a nullish value), the nullish coalescing assignment operator **does not** assign `10`, and `numGuests` remains `0`.
 
-## 5.7. 🔁 Iterating with `for-of` Loops _(ES6+)_
+## 5.7. Iterating with `for-of` Loops _(ES6+)_
 
 The `for-of` loop provides a **clean and readable** way to iterate over **iterables** like arrays, strings, maps, and sets. Unlike `forEach`, it supports `break`, `continue`, and `await` (in async contexts), making it a powerful alternative for looping.
 
@@ -3334,7 +3334,7 @@ for (const [i, el] of menu.entries()) {
 }
 ```
 
-## 5.8. 🧱 Enhanced Object Literals _(ES6+)_
+## 5.8. Enhanced Object Literals _(ES6+)_
 
 Enhanced object literals in ES6 allow you to write cleaner, more concise object definitions by introducing **three main improvements**:
 
@@ -3438,7 +3438,7 @@ const openingHours = {
 };
 ```
 
-## 5.9. 🔗 Optional Chaining
+## 5.9. Optional Chaining
 
 **Optional chaining (`?.`)** lets you safely access deeply nested properties or methods without manually checking each level.
 If a part of the chain is `null` or `undefined`, it **short-circuits** and returns `undefined` — preventing runtime errors.
@@ -3535,7 +3535,7 @@ console.log(users[0]?.name ?? "User array empty"); // → "Jonas"
 
 > ✅ Cleaner and safer than checking `users.length > 0`.
 
-## 5.10. 🔁 Looping Over Objects
+## 5.10. Looping Over Objects
 
 JavaScript objects aren't directly iterable like arrays, but we can loop over their **properties**, **values**, or **entries** using built-in `Object` methods.
 
@@ -3615,7 +3615,7 @@ for (const [day, { open, close }] of entries) {
 // On sat, we open at 0 and close at 24
 ```
 
-## 5.11. 🗃️ Sets _(ES6+)_
+## 5.11. Sets _(ES6+)_
 
 A **Set** is a collection of **unique values**. The order of elements is irrelevant, and duplicates are automatically removed.
 
@@ -3791,7 +3791,7 @@ console.log(herbs.isSubsetOf(italianFoods)); // true
 console.log(italianFoods.isSupersetOf(herbs)); // true
 ```
 
-## 5.12. 🗺️ Maps _(ES6+)_
+## 5.12. Maps _(ES6+)_
 
 A `Map` is a built-in JavaScript object that stores **key–value pairs** where keys can be of **any data type** (unlike `Object`, which only accepts strings or symbols). Maps preserve insertion order and provide convenient methods for manipulation.
 
@@ -3914,7 +3914,7 @@ console.log([...question.keys()]); // Keys only
 console.log([...question.values()]); // Values only
 ```
 
-## 5.13. 📌 Which Data Structure to Use?
+## 5.13. Which Data Structure to Use?
 
 ### 5.13.1. Sources of Data
 
@@ -3966,7 +3966,7 @@ Data in JavaScript can come from various sources:
 
 Great material — now let’s clean it up for **clarity, structure, and readability** like a well-organized documentation section. Here's your updated, **formatted and categorized version**:
 
-## 5.14. 🔤 Strings
+## 5.14. Strings
 
 ### 5.14.1. Accessing Characters
 
@@ -5065,7 +5065,7 @@ Promise.any(promises)
 - If all reject, the `catch` block receives an `AggregateError` containing all rejection reasons.
 - Perfect for scenarios like querying multiple servers and using the fastest successful response.
 
-# 8. 🐛 JavaScript Quirks
+# 8. JavaScript Quirks
 
 This section is personal — it includes things I found strange or surprising while working with JavaScript.
 
